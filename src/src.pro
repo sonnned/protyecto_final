@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     firstlevelscene.cpp \
+    gamemanager.cpp \
     main.cpp \
     game.cpp \
     menuscene.cpp \
@@ -18,6 +19,7 @@ SOURCES += \
 HEADERS += \
     firstlevelscene.h \
     game.h \
+    gamemanager.h \
     menuscene.h \
     secondlevelscene.h
 
