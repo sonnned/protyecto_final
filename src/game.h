@@ -20,12 +20,6 @@ private:
     Ui::Game *ui;
     GameManager* gManager;
     void keyPressEvent(QKeyEvent *event);
-    /*
-     * O -> Game menu
-     * 1 -> Level 1
-     * 2 -> Level 2
-    */
-    int currentPage = 0;
 private slots:
     void onBtnLevel1Clicked();
     void onBtnLevel2Clicked();

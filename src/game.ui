@@ -173,7 +173,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Rick And Morty Final Game</string>
+         <string>Pause Menu</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>

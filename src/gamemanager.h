@@ -4,27 +4,27 @@
 #include "menuscene.h"
 #include "firstlevelscene.h"
 #include "secondlevelscene.h"
+
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include "ui_game.h"
+
+class Game;
 
 class GameManager
 {
 public:
-    GameManager();
+    GameManager(Game *g, Ui::Game *ui);
     ~GameManager();
-    void set_graphicsview(QGraphicsView *g);
+    void changeCurrentScene(int currentView);
 private:
-    QGraphicsView *g;
+    Game *g;
+    Ui::Game *ui;
     QGraphicsScene *s;
     MenuScene *mScene;
     FirstLevelScene *fScene;
     SecondLevelScene *sScene;
-    //Game manager variables
-    bool show_menu = true;
-    bool first_game = false;
-    bool second_game = false;
-private slots:
-    void change_scene(int scene);
+    int currentPage = 0;
 };
 
 #endif // GAMEMANAGER_H

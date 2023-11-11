@@ -6,7 +6,7 @@ Game::Game(QWidget *parent)
     , ui(new Ui::Game)
 {
     ui->setupUi(this);
-    gManager = new GameManager;
+    gManager = new GameManager(this, ui);
     this->setFixedSize(800, 600);
     this->setWindowTitle("Rick and Morty: Final Game");
 
@@ -34,14 +34,12 @@ void Game::keyPressEvent(QKeyEvent *event)
 
 void Game::onBtnLevel1Clicked()
 {
-    currentPage = 1;
-    ui->stackedWidget->setCurrentWidget(ui->level_1);
+    gManager->changeCurrentScene(1);
 }
 
 void Game::onBtnLevel2Clicked()
 {
-    currentPage = 2;
-    ui->stackedWidget->setCurrentWidget(ui->level_2);
+    gManager->changeCurrentScene(2);
 }
 
 void Game::onBtnExitGameClicked()
