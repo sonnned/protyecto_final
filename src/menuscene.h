@@ -1,6 +1,7 @@
 #ifndef MENUSCENE_H
 #define MENUSCENE_H
 
+#include <QObject>
 #include <QGraphicsView>
 #include <QGraphicsScene>
 

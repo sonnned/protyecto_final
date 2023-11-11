@@ -2,7 +2,8 @@
 #define GAME_H
 
 #include <QMainWindow>
-#include "menuscene.h"
+#include <QKeyEvent>
+#include "gamemanager.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Game; }
@@ -17,6 +18,19 @@ public:
     ~Game();
 private:
     Ui::Game *ui;
-    MenuScene *mScene;
+    GameManager* gManager;
+    void keyPressEvent(QKeyEvent *event);
+    /*
+     * O -> Game menu
+     * 1 -> Level 1
+     * 2 -> Level 2
+    */
+    int currentPage = 0;
+private slots:
+    void onBtnLevel1Clicked();
+    void onBtnLevel2Clicked();
+    void onBtnExitGameClicked();
+    void onBtnGoBackClicked();
+    void onBtnContinueClicked();
 };
 #endif // GAME_H
