@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>spritres/characters/Beth.png</file>
+        <file>spritres/characters/Gunk_Beth.png</file>
+        <file>spritres/characters/Gunk_Jerry.png</file>
+        <file>spritres/characters/Gunk_Rick.png</file>
+        <file>spritres/characters/Gunk_Summer.png</file>
+        <file>spritres/characters/Jerry.png</file>
+        <file>spritres/characters/Morty.png</file>
+        <file>spritres/characters/Rick.png</file>
+        <file>spritres/characters/Summer.png</file>
+    </qresource>
+</RCC>
