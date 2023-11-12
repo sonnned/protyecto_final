@@ -34,12 +34,14 @@ void Game::keyPressEvent(QKeyEvent *event)
 
 void Game::onBtnLevel1Clicked()
 {
-    gManager->changeCurrentScene(1);
+    currentPage = 1;
+    gManager->changeCurrentScene(currentPage);
 }
 
 void Game::onBtnLevel2Clicked()
 {
-    gManager->changeCurrentScene(2);
+    currentPage = 2;
+    gManager->changeCurrentScene(currentPage);
 }
 
 void Game::onBtnExitGameClicked()
