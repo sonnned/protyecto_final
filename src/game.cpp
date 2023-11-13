@@ -10,6 +10,7 @@ Game::Game(QWidget *parent)
     this->setFixedSize(800, 600);
     this->setWindowTitle("Rick and Morty: Final Game");
 
+
     connect(ui->btn_level_1, &QPushButton::clicked, this, &Game::onBtnLevel1Clicked);
     connect(ui->btn_level_2, &QPushButton::clicked, this, &Game::onBtnLevel2Clicked);
     connect(ui->btn_exit_game, &QPushButton::clicked, this, &Game::onBtnExitGameClicked);

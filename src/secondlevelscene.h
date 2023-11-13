@@ -6,6 +6,14 @@ class SecondLevelScene
 {
 public:
     SecondLevelScene();
+
+
+private:
+
 };
+
+
+
+
 
 #endif // SECONDLEVELSCENE_H
