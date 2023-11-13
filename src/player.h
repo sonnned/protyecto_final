@@ -28,11 +28,13 @@ public:
     void modifyPositionVector(int pos);
     void setX(int newX);
     void setY(int newY);
+    void setIsMoving(bool newIsMoving);
 private:
     int health;
     int attack;
     int defense;
     int speed;
+    bool is_moving = false;
     int x = 0;
     int y = 0;
     int currentSpriteRows = 0;

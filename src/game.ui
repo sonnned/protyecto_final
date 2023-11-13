@@ -86,7 +86,11 @@
       <widget class="QWidget" name="level_1">
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
-         <widget class="QGraphicsView" name="graphics_level_1"/>
+         <widget class="QGraphicsView" name="graphics_level_1">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>

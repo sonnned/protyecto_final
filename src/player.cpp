@@ -71,6 +71,11 @@ void Player::setY(int newY)
     y = newY;
 }
 
+void Player::setIsMoving(bool newIsMoving)
+{
+    is_moving = newIsMoving;
+}
+
 void Player::cutSprite()
 {
     QPixmap tempSprite;
@@ -93,11 +98,11 @@ void Player::changeSprite() {
         currentSpriteCols = 1;
     }
 
-    currentSpriteRows++;
-    if (currentSpriteRows > limitOfSprites) currentSpriteRows = 0;
+    if (is_moving) {
+        currentSpriteRows++;
+        if (currentSpriteRows > limitOfSprites) currentSpriteRows = 0;
+    }
     cutSprite();
     setPos(x, y);
     setPixmap(*sprite);
-
-    std::cout << currentSpriteRows << std::endl;
 }
