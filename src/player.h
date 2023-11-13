@@ -1,13 +1,17 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "macros.h"
+
 #include <iostream>
+#include <vector>
 #include <string>
 #include <QObject>
 #include <QGraphicsPixmapItem>
 #include <QTimer>
 #include <QKeyEvent>
 #include <QGraphicsScene>
+#include <QTransform>
 
 class Player: public QObject, public QGraphicsPixmapItem
 {
@@ -21,6 +25,9 @@ public:
     int getSpeed();
     int getX();
     int getY();
+    void modifyPositionVector(int pos);
+    void setX(int newX);
+    void setY(int newY);
 private:
     int health;
     int attack;
@@ -28,7 +35,10 @@ private:
     int speed;
     int x;
     int y;
-    int currentSprite = 0;
+    int currentSpriteRows = 0;
+    int currentSpriteCols = 0;
+    //UP, DOWN , LEFT, RIGHT
+    std::vector<int> movementPosition = {0, 1, 0, 0};
     int limitOfSprites;
     int timerInterval;
     std::string characterSprites;

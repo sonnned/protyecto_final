@@ -23,6 +23,7 @@ HEADERS += \
     firstlevelscene.h \
     game.h \
     gamemanager.h \
+    macros.h \
     menuscene.h \
     player.h \
     secondlevelscene.h

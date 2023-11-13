@@ -1,5 +1,6 @@
 #include "game.h"
 #include "ui_game.h"
+#include "firstlevelscene.h"
 
 Game::Game(QWidget *parent)
     : QMainWindow(parent)
@@ -7,8 +8,14 @@ Game::Game(QWidget *parent)
 {
     ui->setupUi(this);
     gManager = new GameManager(this, ui);
+    player = new Player(100, 10, 10, 10, 0, 0, 3, ":/spritres/characters/Rick.png", 1000);
+    scene = new QGraphicsScene;
     this->setFixedSize(800, 600);
     this->setWindowTitle("Rick and Morty: Final Game");
+
+    scene->addItem(player);
+
+    ui->graphics_level_1->setScene(scene);
 
     connect(ui->btn_level_1, &QPushButton::clicked, this, &Game::onBtnLevel1Clicked);
     connect(ui->btn_level_2, &QPushButton::clicked, this, &Game::onBtnLevel2Clicked);
@@ -21,6 +28,7 @@ Game::~Game()
 {
     delete ui;
     delete gManager;
+    delete player;
 }
 
 void Game::keyPressEvent(QKeyEvent *event)

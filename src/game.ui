@@ -86,38 +86,14 @@
       <widget class="QWidget" name="level_1">
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
-         <widget class="QLabel" name="label_4">
-          <property name="font">
-           <font>
-            <pointsize>40</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>PAGE 1</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
+         <widget class="QGraphicsView" name="graphics_level_1"/>
         </item>
        </layout>
       </widget>
       <widget class="QWidget" name="level_2">
        <layout class="QVBoxLayout" name="verticalLayout_5">
         <item>
-         <widget class="QLabel" name="label_2">
-          <property name="font">
-           <font>
-            <pointsize>40</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>PAGE 2</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
+         <widget class="QGraphicsView" name="graphics_level_2"/>
         </item>
        </layout>
       </widget>
