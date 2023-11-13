@@ -8,14 +8,8 @@ Game::Game(QWidget *parent)
 {
     ui->setupUi(this);
     gManager = new GameManager(this, ui);
-    player = new Player(100, 10, 10, 10, 0, 0, 3, ":/spritres/characters/Rick.png", 1000);
-    scene = new QGraphicsScene;
     this->setFixedSize(800, 600);
     this->setWindowTitle("Rick and Morty: Final Game");
-
-    scene->addItem(player);
-
-    ui->graphics_level_1->setScene(scene);
 
     connect(ui->btn_level_1, &QPushButton::clicked, this, &Game::onBtnLevel1Clicked);
     connect(ui->btn_level_2, &QPushButton::clicked, this, &Game::onBtnLevel2Clicked);
@@ -28,15 +22,27 @@ Game::~Game()
 {
     delete ui;
     delete gManager;
-    delete player;
 }
 
 void Game::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Escape) {
-        if (ui->stackedWidget->currentWidget() != ui->menu_page) {
+        if (ui->stackedWidget->currentWidget() != ui->menu_page && ui->stackedWidget->currentWidget() != ui->game_menu) {
             ui->stackedWidget->setCurrentWidget(ui->game_menu);
         }
+        else if (ui->stackedWidget->currentWidget() == ui->game_menu) {
+            gManager->changeCurrentScene(currentPage);
+        }
+    }
+
+    if (event->key() == Qt::Key_W) {
+        gManager->movePlayer(0, -32);
+    } else if (event->key() == Qt::Key_S) {
+        gManager->movePlayer(0, 32);
+    } else if (event->key() == Qt::Key_A) {
+        gManager->movePlayer(-32, 0);
+    } else if (event->key() == Qt::Key_D) {
+        gManager->movePlayer(32, 0);
     }
 }
 
@@ -60,7 +66,7 @@ void Game::onBtnExitGameClicked()
 void Game::onBtnGoBackClicked()
 {
     currentPage = 0;
-    ui->stackedWidget->setCurrentWidget(ui->menu_page);
+    gManager->changeCurrentScene(currentPage);
 }
 
 void Game::onBtnContinueClicked()

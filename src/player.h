@@ -17,7 +17,7 @@ class Player: public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    Player(int health, int attack, int defense, int speed, int x, int y, int limitOfSprites, std::string characterSprites, int timerInterval);
+    Player(int health, int attack, int defense, int speed, int limitOfSprites, std::string characterSprites, int timerInterval);
     ~Player();
     int getHealth();
     int getAttack();
@@ -33,8 +33,8 @@ private:
     int attack;
     int defense;
     int speed;
-    int x;
-    int y;
+    int x = 0;
+    int y = 0;
     int currentSpriteRows = 0;
     int currentSpriteCols = 0;
     //UP, DOWN , LEFT, RIGHT

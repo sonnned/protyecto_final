@@ -2,7 +2,7 @@
 
 FirstLevelScene::FirstLevelScene()
 {
-    //player = new Player(100, 10, 10, 10, 0, 0, 2, playerSprites[0], 1000);
+    //player = new Player(100, 10, 10, 10, 0, 0, 3, ":/spritres/characters/Rick.png", 1000);
 }
 
 FirstLevelScene::~FirstLevelScene()

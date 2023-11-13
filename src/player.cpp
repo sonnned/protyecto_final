@@ -1,6 +1,6 @@
 #include "player.h"
 
-Player::Player(int health, int attack, int defense, int speed, int x, int y, int limitOfSprites, std::string characterSprites, int timerInterval)
+Player::Player(int health, int attack, int defense, int speed, int limitOfSprites, std::string characterSprites, int timerInterval)
 {
     this->health = health;
     this->attack = attack;
@@ -96,6 +96,8 @@ void Player::changeSprite() {
     currentSpriteRows++;
     if (currentSpriteRows > limitOfSprites) currentSpriteRows = 0;
     cutSprite();
-    setPos(80, 90);
+    setPos(x, y);
     setPixmap(*sprite);
+
+    std::cout << currentSpriteRows << std::endl;
 }

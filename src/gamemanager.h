@@ -4,7 +4,11 @@
 #include "menuscene.h"
 #include "firstlevelscene.h"
 #include "secondlevelscene.h"
+#include "player.h"
 
+#include <iostream>
+#include <vector>
+#include <string>
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include "ui_game.h"
@@ -17,6 +21,8 @@ public:
     GameManager(Game *g, Ui::Game *ui);
     ~GameManager();
     void changeCurrentScene(int currentView);
+    void movePlayer(int newX, int newY);
+    bool checkIsPlayerOnScreen(int x, int y);
 private:
     Game *g;
     Ui::Game *ui;
@@ -24,7 +30,9 @@ private:
     MenuScene *mScene;
     FirstLevelScene *fScene;
     SecondLevelScene *sScene;
+    Player *player;
     int currentPage = 0;
+    std::vector<std::string> playerSprites = {":/spritres/characters/Rick.png", ":/spritres/characters/Morty.png"};
 };
 
 #endif // GAMEMANAGER_H

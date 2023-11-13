@@ -3,9 +3,7 @@
 
 #include <QMainWindow>
 #include <QKeyEvent>
-#include <QGraphicsScene>
 #include "gamemanager.h"
-#include "player.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Game; }
@@ -23,8 +21,6 @@ private:
     GameManager* gManager;
     void keyPressEvent(QKeyEvent *event);
     int currentPage = 0;
-    QGraphicsScene *scene;
-    Player *player;
 private slots:
     void onBtnLevel1Clicked();
     void onBtnLevel2Clicked();
