@@ -15,6 +15,8 @@ GameManager::~GameManager() {
     delete sScene;
     delete fScene;
     delete player;
+    delete background_2;
+    delete brocha;
 }
 
 void GameManager::changeCurrentScene(int currentView)
@@ -28,9 +30,17 @@ void GameManager::changeCurrentScene(int currentView)
         ui->stackedWidget->setCurrentWidget(ui->level_1);
     } else if (currentView == 2) {
         s->clear();
-        ui->stackedWidget->setCurrentWidget(ui->level_2);
-        ui->graphics_level_2->
+        background_2 = new QImage(":/sprites/backgrounds/fondo_espacio.jpg");
 
+        // Create a rectangle item to represent the background
+        QGraphicsRectItem *backgroundRect = new QGraphicsRectItem(0, 0, ui->level_1->width() - 2, ui->level_1->height() - 2);
+        brocha = new QBrush(*background_2);
+        backgroundRect->setBrush(*brocha);
+
+        // Add the background rectangle to the scene
+        s->addItem(backgroundRect);
+        ui->graphics_level_2->setScene(s);
+        ui->stackedWidget->setCurrentWidget(ui->level_2);
 
     } else if (currentView == 0){
         s->clear();

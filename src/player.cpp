@@ -85,6 +85,7 @@ void Player::cutSprite()
         , (CHARACTER_SPRITE_START_Y_POSITION + (CHARACTER_SPRITE_BORDER * currentSpriteCols)) + ((CHARACTER_HEIGHT * currentSpriteCols))
         , CHARACTER_WEIGHT, CHARACTER_HEIGHT
     );
+    sprite->scaled(12, 12, Qt::KeepAspectRatio);
 }
 
 void Player::changeSprite() {

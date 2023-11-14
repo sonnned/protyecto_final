@@ -2,13 +2,15 @@
 #define SECONDLEVELSCENE_H
 
 
-#include "qimage.h"
+#include <QImage>
+
 class SecondLevelScene
 {
 public:
     SecondLevelScene();
+    ~SecondLevelScene();
 private:
-    QImage background_2(":/spritres/backgrounds/fondo_espacio.jpg");
+    QImage *background_2;
 
 };
 

@@ -6,6 +6,7 @@ debug/game.o
 debug/menuscene.o
 debug/player.o
 debug/secondlevelscene.o
+debug/qrc_backgrounds.o
 debug/qrc_charactesSprites.o
 debug/moc_game.o
 debug/moc_player.o

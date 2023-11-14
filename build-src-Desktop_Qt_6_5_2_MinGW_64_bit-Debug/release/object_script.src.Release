@@ -6,6 +6,7 @@ release/game.o
 release/menuscene.o
 release/player.o
 release/secondlevelscene.o
+release/qrc_backgrounds.o
 release/qrc_charactesSprites.o
 release/moc_game.o
 release/moc_player.o
