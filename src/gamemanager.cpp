@@ -29,6 +29,9 @@ void GameManager::changeCurrentScene(int currentView)
     } else if (currentView == 2) {
         s->clear();
         ui->stackedWidget->setCurrentWidget(ui->level_2);
+        ui->graphics_level_2->
+
+
     } else if (currentView == 0){
         s->clear();
         ui->stackedWidget->setCurrentWidget(ui->menu_page);
