@@ -1,5 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>spritres/backgrounds/fondo_espacio.jpg</file>
+        <file>spritres/fondo_espacio.jpg</file>
     </qresource>
 </RCC>
