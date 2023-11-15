@@ -89,20 +89,31 @@ void Player::cutSprite()
 }
 
 void Player::changeSprite() {
+    QTransform matrix;
     if (movementPosition[0] == 1) {
         currentSpriteCols = 2;
+        setTransformOriginPoint(62.5, 81);
+        setRotation(0);
     } else if (movementPosition[1] == 1) {
         currentSpriteCols = 0;
+        setTransformOriginPoint(62.5, 81);
+        setRotation(0);
     } else if (movementPosition[2] == 1) {
         currentSpriteCols = 1;
+        setTransformOriginPoint(62.5, 81);
+        setRotation(0);
     } else if (movementPosition[3] == 1) {
         currentSpriteCols = 1;
+        setTransformOriginPoint(62.5, 81);
+        setRotation(180);
+        matrix = matrix.rotate(180,Qt::YAxis);
+        setTransform(matrix);
     }
 
     if (is_moving) {
         currentSpriteRows++;
         if (currentSpriteRows > limitOfSprites) currentSpriteRows = 0;
-    } else currentSpriteCols = 0;
+    }
     cutSprite();
     setPos(x, y);
     setPixmap(*sprite);
