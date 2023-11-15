@@ -100,8 +100,8 @@ void Player::changeSprite() {
         setRotation(0);
     } else if (movementPosition[2] == 1) {
         currentSpriteCols = 1;
-        setTransformOriginPoint(62.5, 81);
-        setRotation(0);
+        matrix = matrix.rotate(0,Qt::YAxis);
+        setTransform(matrix);
     } else if (movementPosition[3] == 1) {
         currentSpriteCols = 1;
         setTransformOriginPoint(62.5, 81);
