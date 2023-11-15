@@ -35,7 +35,7 @@ private:
     Player *player;
     int currentPage = 0;
     std::vector<std::string> playerSprites = {":/spritres/characters/Rick.png", ":/spritres/characters/Morty.png"};
-    QImage *background_2;
+    QPixmap *background_2;
     QBrush *brocha;
 };
 
