@@ -25,6 +25,8 @@ public:
     void changeCurrentScene(int currentView);
     void movePlayer(int newX, int newY);
     bool checkIsPlayerOnScreen(int x, int y);
+    void changePlayerPosition(int pos);
+    void changeMovement();
 private:
     Game *g;
     Ui::Game *ui;

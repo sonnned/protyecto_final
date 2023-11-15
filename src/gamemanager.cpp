@@ -68,3 +68,13 @@ bool GameManager::checkIsPlayerOnScreen(int x, int y)
     }
     return true;
 }
+
+void GameManager::changePlayerPosition(int pos)
+{
+    player->modifyPositionVector(pos);
+}
+
+void GameManager::changeMovement()
+{
+    player->setIsMoving(false);
+}

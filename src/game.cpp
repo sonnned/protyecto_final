@@ -37,12 +37,29 @@ void Game::keyPressEvent(QKeyEvent *event)
 
     if (event->key() == Qt::Key_W) {
         gManager->movePlayer(0, -32);
+        gManager->changePlayerPosition(0);
     } else if (event->key() == Qt::Key_S) {
         gManager->movePlayer(0, 32);
+        gManager->changePlayerPosition(1);
     } else if (event->key() == Qt::Key_A) {
         gManager->movePlayer(-32, 0);
+        gManager->changePlayerPosition(2);
     } else if (event->key() == Qt::Key_D) {
         gManager->movePlayer(32, 0);
+        gManager->changePlayerPosition(3);
+    }
+}
+
+void Game::keyReleaseEvent(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_W) {
+        gManager->changeMovement();
+    } else if (event->key() == Qt::Key_S) {
+        gManager->changeMovement();
+    } else if (event->key() == Qt::Key_A) {
+        gManager->changeMovement();
+    } else if (event->key() == Qt::Key_D) {
+        gManager->changeMovement();
     }
 }
 

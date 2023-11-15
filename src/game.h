@@ -20,6 +20,7 @@ private:
     Ui::Game *ui;
     GameManager* gManager;
     void keyPressEvent(QKeyEvent *event);
+    void keyReleaseEvent(QKeyEvent *event);
     int currentPage = 0;
 private slots:
     void onBtnLevel1Clicked();

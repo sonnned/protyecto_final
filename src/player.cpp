@@ -82,32 +82,22 @@ void Player::cutSprite()
     tempSprite.load(QString::fromStdString(characterSprites));
     *sprite = tempSprite.copy(
         (CHARACTER_SPRITE_BORDER * (currentSpriteRows + 1)) + (CHARACTER_WEIGHT * currentSpriteRows)
-        , (CHARACTER_SPRITE_START_Y_POSITION + (CHARACTER_SPRITE_BORDER * currentSpriteCols)) + ((CHARACTER_HEIGHT * currentSpriteCols))
-        , CHARACTER_WEIGHT, CHARACTER_HEIGHT
+        , CHARACTER_SPRITE_START_Y_POSITION + (CHARACTER_HEIGHT * currentSpriteCols) + (CHARACTER_SPRITE_BORDER * (currentSpriteCols + 1))
+        , CHARACTER_WEIGHT
+        , CHARACTER_HEIGHT
     );
     sprite->scaled(12, 12, Qt::KeepAspectRatio);
 }
 
 void Player::changeSprite() {
-    QTransform matrix;
     if (movementPosition[0] == 1) {
-        currentSpriteCols = 2;
-        setTransformOriginPoint(62.5, 81);
-        setRotation(0);
+        currentSpriteCols = 3;
     } else if (movementPosition[1] == 1) {
-        currentSpriteCols = 0;
-        setTransformOriginPoint(62.5, 81);
-        setRotation(0);
+        currentSpriteCols = 1;
     } else if (movementPosition[2] == 1) {
-        currentSpriteCols = 1;
-        matrix = matrix.rotate(0,Qt::YAxis);
-        setTransform(matrix);
+        currentSpriteCols = 2;
     } else if (movementPosition[3] == 1) {
-        currentSpriteCols = 1;
-        setTransformOriginPoint(62.5, 81);
-        setRotation(180);
-        matrix = matrix.rotate(180,Qt::YAxis);
-        setTransform(matrix);
+        currentSpriteCols = 0;
     }
 
     if (is_moving) {
