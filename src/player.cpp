@@ -102,7 +102,7 @@ void Player::changeSprite() {
     if (is_moving) {
         currentSpriteRows++;
         if (currentSpriteRows > limitOfSprites) currentSpriteRows = 0;
-    }
+    } else currentSpriteCols = 0;
     cutSprite();
     setPos(x, y);
     setPixmap(*sprite);
