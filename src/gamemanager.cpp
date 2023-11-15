@@ -30,7 +30,7 @@ void GameManager::changeCurrentScene(int currentView)
         ui->stackedWidget->setCurrentWidget(ui->level_1);
     } else if (currentView == 2) {
         s->clear();
-        background_2 = new QPixmap(":/spritres/fondo_espacio.jpg");
+        background_2 = new QPixmap(":/spritres/backgrounds/fondo_espacio.jpg");
 
         // Create a rectangle item to represent the background
         //QGraphicsRectItem *backgroundRect = new QGraphicsRectItem(0, 0, ui->level_1->width() - 2, ui->level_1->height() - 2);
