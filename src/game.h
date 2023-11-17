@@ -19,14 +19,15 @@ public:
 private:
     Ui::Game *ui;
     GameManager* gManager;
-    void keyPressEvent(QKeyEvent *event);
-    void keyReleaseEvent(QKeyEvent *event);
     int currentPage = 0;
+    void changeCurrentPageView();
+    bool isPaused = false;
+    bool isPlaying = false;
 private slots:
-    void onBtnLevel1Clicked();
-    void onBtnLevel2Clicked();
-    void onBtnExitGameClicked();
-    void onBtnGoBackClicked();
-    void onBtnContinueClicked();
+    void setFirstLevel();
+    void setSecondLevel();
+    void setLeaveGame();
+    void keyPressEvent(QKeyEvent *e);
+    void keyReleaseEvent(QKeyEvent *e);
 };
 #endif // GAME_H

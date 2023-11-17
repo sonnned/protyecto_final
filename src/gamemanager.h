@@ -1,6 +1,7 @@
 #ifndef GAMEMANAGER_H
 #define GAMEMANAGER_H
 
+#include "macros.h"
 #include "menuscene.h"
 #include "firstlevelscene.h"
 #include "secondlevelscene.h"
@@ -9,6 +10,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <QObject>
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QImage>
@@ -20,25 +22,16 @@ class Game;
 class GameManager
 {
 public:
-    GameManager(Game *g, Ui::Game *ui);
+    GameManager(QGraphicsView *g);
     ~GameManager();
-    void changeCurrentScene(int currentView);
-    void movePlayer(int newX, int newY);
-    bool checkIsPlayerOnScreen(int x, int y);
-    void changePlayerPosition(int pos);
-    void changeMovement();
+    void showLevelScene(int currentLevelScene);
+    void playerMovement(int pos);
+    void playerNoMovement();
 private:
-    Game *g;
-    Ui::Game *ui;
-    QGraphicsScene *s;
-    MenuScene *mScene;
-    FirstLevelScene *fScene;
-    SecondLevelScene *sScene;
-    Player *player;
-    int currentPage = 0;
-    std::vector<std::string> playerSprites = {":/spritres/characters/Rick.png", ":/spritres/characters/Morty.png"};
-    QPixmap *background_2;
-    QBrush *brocha;
+    int currentLevelScene = 0; // 0 -> NADA // 1 -> PRIMER NIVEL // 2 -> SEGUNDO NIVEL
+    QGraphicsView *g;
+    FirstLevelScene *fLevel;
+    SecondLevelScene *sLevel;
 };
 
 #endif // GAMEMANAGER_H

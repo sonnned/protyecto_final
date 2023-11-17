@@ -7,15 +7,16 @@ Game::Game(QWidget *parent)
     , ui(new Ui::Game)
 {
     ui->setupUi(this);
-    gManager = new GameManager(this, ui);
     this->setFixedSize(800, 600);
     this->setWindowTitle("Rick and Morty: Final Game");
+    ui->gameGraphics->setFixedSize(800, 600);
+    ui->gameGraphics->setVisible(false);
 
-    connect(ui->btn_level_1, &QPushButton::clicked, this, &Game::onBtnLevel1Clicked);
-    connect(ui->btn_level_2, &QPushButton::clicked, this, &Game::onBtnLevel2Clicked);
-    connect(ui->btn_exit_game, &QPushButton::clicked, this, &Game::onBtnExitGameClicked);
-    connect(ui->btn_go_back, &QPushButton::clicked, this, &Game::onBtnGoBackClicked);
-    connect(ui->btn_continue, &QPushButton::clicked, this, &Game::onBtnContinueClicked);
+    gManager = new GameManager(ui->gameGraphics);
+
+    connect(ui->pushExitBtn, &QPushButton::clicked, this, &Game::setLeaveGame);
+    connect(ui->pushLevel1Btn, &QPushButton::clicked, this, &Game::setFirstLevel);
+    connect(ui->pushLevel2Btn, &QPushButton::clicked, this, &Game::setSecondLevel);
 }
 
 Game::~Game()
@@ -24,74 +25,67 @@ Game::~Game()
     delete gManager;
 }
 
-void Game::keyPressEvent(QKeyEvent *event)
+void Game::changeCurrentPageView()
 {
-    if (event->key() == Qt::Key_Escape) {
-        if (ui->stackedWidget->currentWidget() != ui->menu_page && ui->stackedWidget->currentWidget() != ui->game_menu) {
-            ui->stackedWidget->setCurrentWidget(ui->game_menu);
-        }
-        else if (ui->stackedWidget->currentWidget() == ui->game_menu) {
-            gManager->changeCurrentScene(currentPage);
-        }
-    }
-
-    if (event->key() == Qt::Key_W) {
-        gManager->movePlayer(0, -32);
-        gManager->changePlayerPosition(0);
-    } else if (event->key() == Qt::Key_S) {
-        gManager->movePlayer(0, 32);
-        gManager->changePlayerPosition(1);
-    } else if (event->key() == Qt::Key_A) {
-        gManager->movePlayer(-32, 0);
-        gManager->changePlayerPosition(2);
-    } else if (event->key() == Qt::Key_D) {
-        gManager->movePlayer(32, 0);
-        gManager->changePlayerPosition(3);
-    }
+    this->setVisible(false);
+    if (currentPage == 1) gManager->showLevelScene(1);
+    else if (currentPage == 2) gManager->showLevelScene(2);
+    this->show();
 }
 
-void Game::keyReleaseEvent(QKeyEvent *event)
-{
-    if (event->key() == Qt::Key_W) {
-        gManager->changeMovement();
-    } else if (event->key() == Qt::Key_S) {
-        gManager->changeMovement();
-    } else if (event->key() == Qt::Key_A) {
-        gManager->changeMovement();
-    } else if (event->key() == Qt::Key_D) {
-        gManager->changeMovement();
-    }
-}
-
-void Game::onBtnLevel1Clicked()
+void Game::setFirstLevel()
 {
     currentPage = 1;
-    gManager->changeCurrentScene(currentPage);
+    isPlaying = true;
+    changeCurrentPageView();
+
 }
 
-void Game::onBtnLevel2Clicked()
+void Game::setSecondLevel()
 {
     currentPage = 2;
-    gManager->changeCurrentScene(currentPage);
+    isPlaying = true;
+    changeCurrentPageView();
 }
 
-void Game::onBtnExitGameClicked()
-{
+void Game::setLeaveGame() {
     this->close();
 }
 
-void Game::onBtnGoBackClicked()
+void Game::keyPressEvent(QKeyEvent *e)
 {
-    currentPage = 0;
-    gManager->changeCurrentScene(currentPage);
-}
+    if (isPaused) {
+        if (e->key() == Qt::Key_Escape) {
+        }
+        return;
+    }
 
-void Game::onBtnContinueClicked()
-{
-    if (currentPage == 1) {
-        ui->stackedWidget->setCurrentWidget(ui->level_1);
-    } else if (currentPage == 2) {
-        ui->stackedWidget->setCurrentWidget(ui->level_2);
+    if (isPlaying) {
+        if (e->key() == Qt::Key_W) {
+            gManager->playerMovement(0);
+        } else if (e->key() == Qt::Key_S) {
+            gManager->playerMovement(1);
+        } else if (e->key() == Qt::Key_A) {
+            gManager->playerMovement(2);
+        } else if (e->key() == Qt::Key_D) {
+            gManager->playerMovement(3);
+        }
     }
 }
+
+void Game::keyReleaseEvent(QKeyEvent *e)
+{
+    if (isPlaying) {
+        if (e->key() == Qt::Key_W) {
+            gManager->playerNoMovement();
+        } else if (e->key() == Qt::Key_S) {
+            gManager->playerNoMovement();
+        } else if (e->key() == Qt::Key_A) {
+            gManager->playerNoMovement();
+        } else if (e->key() == Qt::Key_D) {
+            gManager->playerNoMovement();
+        }
+    }
+}
+
 

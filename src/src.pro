@@ -16,7 +16,8 @@ SOURCES += \
     game.cpp \
     menuscene.cpp \
     player.cpp \
-    secondlevelscene.cpp
+    secondlevelscene.cpp \
+    spacecraft.cpp
 
 HEADERS += \
     enemy.h \
@@ -26,7 +27,8 @@ HEADERS += \
     macros.h \
     menuscene.h \
     player.h \
-    secondlevelscene.h
+    secondlevelscene.h \
+    spacecraft.h
 
 FORMS += \
     game.ui

@@ -6,14 +6,12 @@ Player::Player(int health, int attack, int defense, int speed, int limitOfSprite
     this->attack = attack;
     this->defense = defense;
     this->speed = speed;
-    this->x = x;
-    this->y = y;
     this->limitOfSprites = limitOfSprites;
     this->characterSprites = characterSprites;
     this->timerInterval = timerInterval;
     sprite = new QPixmap;
     this->timer = new QTimer();
-    timer->start(timerInterval / 5);
+    timer->start(timerInterval / 10);
     connect(timer, SIGNAL(timeout()), this, SLOT(changeSprite()));
 }
 
@@ -43,14 +41,14 @@ int Player::getSpeed()
     return speed;
 }
 
-int Player::getX()
+int Player::getXPos()
 {
-    return x;
+    return this->x();
 }
 
-int Player::getY()
+int Player::getYPos()
 {
-    return y;
+    return this->y();
 }
 
 void Player::modifyPositionVector(int pos)
@@ -61,19 +59,29 @@ void Player::modifyPositionVector(int pos)
     }
 }
 
-void Player::setX(int newX)
-{
-    x = newX;
-}
-
-void Player::setY(int newY)
-{
-    y = newY;
-}
-
 void Player::setIsMoving(bool newIsMoving)
 {
     is_moving = newIsMoving;
+}
+
+void Player::movePlayer()
+{
+    if (movementPosition[0] == 1) {
+        setPos(this->x(), this->y() - 4);
+        if (this->y() < 0) setPos(this->x(), this->y() + 4);
+    }
+    else if (movementPosition[1] == 1) {
+        setPos(this->x(), this->y() + 4);
+        if (this->y() > 516) setPos(this->x(), 516);
+    }
+    else if (movementPosition[2] == 1) {
+        setPos(this->x() - 4, this->y());
+        if (this->x() < 0) setPos(this->x() + 4, this->y());
+    }
+    else if (movementPosition[3] == 1) {
+        setPos(this->x() + 4, this->y());
+        if (this->x() > 736) setPos(736, this->y());
+    }
 }
 
 void Player::cutSprite()
@@ -86,18 +94,18 @@ void Player::cutSprite()
         , CHARACTER_WEIGHT
         , CHARACTER_HEIGHT
     );
-    sprite->scaled(12, 12, Qt::KeepAspectRatio);
+    *sprite = sprite->scaled(CHARACTER_SCALED, CHARACTER_SCALED, Qt::KeepAspectRatio);
 }
 
 void Player::changeSprite() {
     if (movementPosition[0] == 1) {
-        currentSpriteCols = 3;
-    } else if (movementPosition[1] == 1) {
-        currentSpriteCols = 1;
-    } else if (movementPosition[2] == 1) {
         currentSpriteCols = 2;
-    } else if (movementPosition[3] == 1) {
+    } else if (movementPosition[1] == 1) {
         currentSpriteCols = 0;
+    } else if (movementPosition[2] == 1) {
+        currentSpriteCols = 1;
+    } else if (movementPosition[3] == 1) {
+        currentSpriteCols = 3;
     }
 
     if (is_moving) {
@@ -105,6 +113,6 @@ void Player::changeSprite() {
         if (currentSpriteRows > limitOfSprites) currentSpriteRows = 0;
     }
     cutSprite();
-    setPos(x, y);
+
     setPixmap(*sprite);
 }

@@ -23,20 +23,17 @@ public:
     int getAttack();
     int getDefense();
     int getSpeed();
-    int getX();
-    int getY();
+    int getXPos();
+    int getYPos();
     void modifyPositionVector(int pos);
-    void setX(int newX);
-    void setY(int newY);
     void setIsMoving(bool newIsMoving);
+    void movePlayer();
 private:
     int health;
     int attack;
     int defense;
     int speed;
     bool is_moving = false;
-    int x = 0;
-    int y = 0;
     int currentSpriteRows = 0;
     int currentSpriteCols = 0;
     //UP, DOWN , LEFT, RIGHT
