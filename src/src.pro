@@ -40,4 +40,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     backgrounds.qrc \
-    charactesSprites.qrc
+    charactesSprites.qrc \
+    enemies.qrc

@@ -2,14 +2,18 @@
 #define FIRSTLEVELSCENE_H
 
 #include "player.h"
+#include "enemy.h"
 
 #include <iostream>
+#include <cmath>
 #include <vector>
 #include <string>
+#include <QObject>
+#include <QTimer>
 #include <QGraphicsScene>
 #include <QGraphicsView>
 
-class FirstLevelScene
+class FirstLevelScene: public QObject
 {
 public:
     FirstLevelScene();
@@ -24,7 +28,11 @@ private:
     QGraphicsView *g;
     QGraphicsScene *s;
     Player *p;
-    std::vector<std::string> playerSprites = {":/spritres/characters/Rick.png", ":/spritres/characters/Morty.png"};
+    Enemy *e;
+    QTimer *enemyTimer;
+    std::vector<std::string> playerSprites = {":/spritres/characters/Rick.png", ":/spritres/enemies/Dragonfly.png"};
+private slots:
+    void generateEnemy();
 };
 
 #endif // FIRSTLEVELSCENE_H

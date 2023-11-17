@@ -109,6 +109,7 @@ void Player::changeSprite() {
     }
 
     if (is_moving) {
+        emit changeEnemyPos(this->x(), this->y());
         currentSpriteRows++;
         if (currentSpriteRows > limitOfSprites) currentSpriteRows = 0;
     }

@@ -46,6 +46,8 @@ private:
     void cutSprite();
 private slots:
     void changeSprite();
+signals:
+    void changeEnemyPos(int x, int y);
 };
 
 #endif // PLAYER_H

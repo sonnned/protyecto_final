@@ -4,6 +4,11 @@ FirstLevelScene::FirstLevelScene()
 {
     s = new QGraphicsScene;
     p = new Player(100, 10, 10, 10, 3, playerSprites[0], 1000);
+    e = new Enemy(100, 10, 10, 10, 3, playerSprites[1], 1000);
+    connect(p, &Player::changeEnemyPos, e, &Enemy::changePosition);
+    enemyTimer = new QTimer;
+    enemyTimer->start(3000);
+    connect(enemyTimer, &QTimer::timeout, this, &FirstLevelScene::generateEnemy);
 }
 
 FirstLevelScene::~FirstLevelScene()
@@ -11,6 +16,7 @@ FirstLevelScene::~FirstLevelScene()
     delete s;
     delete g;
     delete p;
+    delete e;
 }
 
 void FirstLevelScene::setGraphicsScene(QGraphicsView *g)
@@ -18,6 +24,7 @@ void FirstLevelScene::setGraphicsScene(QGraphicsView *g)
     this->g = g;
     s->setSceneRect(0, 0, g->width() - 2, g->height() - 2);
     s->addItem(p);
+    s->addItem(e);
     g->setScene(s);
 }
 
@@ -45,4 +52,23 @@ int FirstLevelScene::getXPlayerPos()
 int FirstLevelScene::getYPlayerPos()
 {
     return p->getYPos();
+}
+
+void FirstLevelScene::generateEnemy()
+{
+    int distanceGeneration = 200;
+    int angleOfGeneration = qrand() % 360;
+
+    int xPos = p->getXPos() + distanceGeneration * std::cos(angleOfGeneration * M_PI / 180);
+    int yPos = p->getYPos() + distanceGeneration * std::sin(angleOfGeneration * M_PI / 180);
+
+    xPos = qBound(0, xPos, static_cast<int>(s->width()));
+    yPos = qBound(0, yPos, static_cast<int>(s->height()));
+
+    Enemy *newEnemy = new Enemy(100, 10, 10, 10, 3, playerSprites[1], 1000);
+    newEnemy->setPos(xPos, yPos);
+
+    connect(p, &Player::changeEnemyPos, newEnemy, &Enemy::changePosition);
+
+    s->addItem(newEnemy);
 }
