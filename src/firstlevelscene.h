@@ -28,7 +28,6 @@ private:
     QGraphicsView *g;
     QGraphicsScene *s;
     Player *p;
-    Enemy *e;
     QTimer *enemyTimer;
     std::vector<std::string> playerSprites = {":/spritres/characters/Rick.png", ":/spritres/enemies/Dragonfly.png"};
 private slots:

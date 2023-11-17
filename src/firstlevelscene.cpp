@@ -4,8 +4,6 @@ FirstLevelScene::FirstLevelScene()
 {
     s = new QGraphicsScene;
     p = new Player(100, 10, 10, 10, 3, playerSprites[0], 1000);
-    e = new Enemy(100, 10, 10, 10, 3, playerSprites[1], 1000);
-    connect(p, &Player::changeEnemyPos, e, &Enemy::changePosition);
     enemyTimer = new QTimer;
     enemyTimer->start(3000);
     connect(enemyTimer, &QTimer::timeout, this, &FirstLevelScene::generateEnemy);
@@ -16,7 +14,6 @@ FirstLevelScene::~FirstLevelScene()
     delete s;
     delete g;
     delete p;
-    delete e;
 }
 
 void FirstLevelScene::setGraphicsScene(QGraphicsView *g)
@@ -24,7 +21,6 @@ void FirstLevelScene::setGraphicsScene(QGraphicsView *g)
     this->g = g;
     s->setSceneRect(0, 0, g->width() - 2, g->height() - 2);
     s->addItem(p);
-    s->addItem(e);
     g->setScene(s);
 }
 
