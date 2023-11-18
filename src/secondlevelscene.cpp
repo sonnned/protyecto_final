@@ -30,6 +30,6 @@ void SecondLevelScene::setGraphicsScene(QGraphicsView *g)
     s->addItem(nave);
     nave->setScale(0.5);
     nave->setPixmap(*spr_nave);
-   nave->setPos(200,200);
+     nave->setPos(200,200);
 
 }
