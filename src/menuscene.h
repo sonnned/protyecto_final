@@ -1,19 +1,41 @@
 #ifndef MENUSCENE_H
 #define MENUSCENE_H
 
+#include <iostream>
+#include <cmath>
+#include <vector>
+#include <string>
 #include <QObject>
-#include <QGraphicsView>
+#include <QTimer>
 #include <QGraphicsScene>
+#include <QGraphicsView>
+#include <QGraphicsTextItem>
+#include <QGraphicsProxyWidget>
+#include <QPushButton>
 
-class MenuScene
+class MenuScene: public QObject
 {
 public:
     MenuScene();
     ~MenuScene();
-    void set_graphicsview(QGraphicsView *g);
+    void setGraphicsScene(QGraphicsView *g);
 private:
     QGraphicsView *g;
     QGraphicsScene *s;
+    QGraphicsTextItem *menuTitle;
+    QPushButton *continueBtn;
+    QGraphicsProxyWidget *continueBtnProxy;
+    QPushButton *backBtn;
+    QGraphicsProxyWidget *backBtnProxy;
+    void setMenuItems();
+    /*
+private slots:
+    void continueBtnClicked();
+    void backBtnClicked();
+signals:
+    void continueClicked();
+    void backClicked();
+*/
 };
 
 #endif // MENUSCENE_H

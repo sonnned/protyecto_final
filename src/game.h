@@ -24,6 +24,7 @@ private:
     bool isPaused = false;
     bool isPlaying = false;
 private slots:
+    void setMenu();
     void setFirstLevel();
     void setSecondLevel();
     void setLeaveGame();

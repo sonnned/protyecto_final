@@ -25,6 +25,7 @@ public:
     GameManager(QGraphicsView *g);
     ~GameManager();
     void showLevelScene(int currentLevelScene);
+    void showMenu();
     void playerMovement(int pos);
     void playerNoMovement();
 private:
@@ -32,6 +33,10 @@ private:
     QGraphicsView *g;
     FirstLevelScene *fLevel;
     SecondLevelScene *sLevel;
+    MenuScene *mScene;
+    void clearCurrentScene();
+private slots:
+    void continueGame();
 };
 
 #endif // GAMEMANAGER_H

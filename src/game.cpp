@@ -30,7 +30,15 @@ void Game::changeCurrentPageView()
     this->setVisible(false);
     if (currentPage == 1) gManager->showLevelScene(1);
     else if (currentPage == 2) gManager->showLevelScene(2);
+    else if (currentPage == 3) gManager->showMenu();
     this->show();
+}
+
+void Game::setMenu()
+{
+    currentPage = 3;
+    isPlaying = false;
+    changeCurrentPageView();
 }
 
 void Game::setFirstLevel()
@@ -61,7 +69,9 @@ void Game::keyPressEvent(QKeyEvent *e)
     }
 
     if (isPlaying) {
-        if (e->key() == Qt::Key_W) {
+        if (e->key() == Qt::Key_Escape) {
+            setMenu();
+        } else if (e->key() == Qt::Key_W) {
             gManager->playerMovement(0);
         } else if (e->key() == Qt::Key_S) {
             gManager->playerMovement(1);
