@@ -53,7 +53,7 @@ int FirstLevelScene::getYPlayerPos()
 void FirstLevelScene::generateEnemy()
 {
     int distanceGeneration = 200;
-    int angleOfGeneration = qrand() % 360;
+    int angleOfGeneration = rand() % 360;
 
     int xPos = p->getXPos() + distanceGeneration * std::cos(angleOfGeneration * M_PI / 180);
     int yPos = p->getYPos() + distanceGeneration * std::sin(angleOfGeneration * M_PI / 180);

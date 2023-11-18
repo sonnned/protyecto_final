@@ -1,18 +1,17 @@
 #ifndef SPACECRAFT_H
 #define SPACECRAFT_H
-
+#include <string>>
 #include <QPixmap>
-
-class Spacecraft
+#include <QGraphicsPixmapItem>
+class Spacecraft :public QGraphicsPixmapItem
 {
 public:
     Spacecraft();
-    Spacecraft(int health, int x, int y, QPixmap *sprite);
+    Spacecraft(int health, int x, int y);
 private:
     int health;
     int x;
     int y;
-    QPixmap *sprite;
 };
 
 #endif // SPACECRAFT_H

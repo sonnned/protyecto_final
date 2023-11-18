@@ -1,6 +1,6 @@
 #ifndef SECONDLEVELSCENE_H
 #define SECONDLEVELSCENE_H
-
+#include "QGraphicsPixmapItem""
 #include <spacecraft.h>
 
 #include <iostream>
@@ -22,7 +22,8 @@ private:
     QGraphicsScene *s;
     QPixmap *background;
     QBrush *brush;
-    Spacecraft *spacecraft;
+    QPixmap *spr_nave;
+    Spacecraft *nave;
 
 };
 
