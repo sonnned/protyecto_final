@@ -1,8 +1,8 @@
 #ifndef SECONDLEVELSCENE_H
 #define SECONDLEVELSCENE_H
-#include "QGraphicsPixmapItem""
-#include <spacecraft.h>
-
+#include "QGraphicsPixmapItem"
+#include "spacecraft.h"
+#include <QKeyEvent>
 #include <iostream>
 #include <vector>
 #include <string>
@@ -10,10 +10,12 @@
 #include <QBrush>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QGraphicsItem>
 
-class SecondLevelScene
+class SecondLevelScene:public QGraphicsScene
 {
 public:
+
     SecondLevelScene();
     ~SecondLevelScene();
     void setGraphicsScene(QGraphicsView *g);
@@ -24,6 +26,9 @@ private:
     QBrush *brush;
     QPixmap *spr_nave;
     Spacecraft *nave;
+
+protected:
+     void keyPressEvent(QKeyEvent *event);
 
 };
 
