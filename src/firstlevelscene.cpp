@@ -5,6 +5,7 @@ FirstLevelScene::FirstLevelScene()
     s = new QGraphicsScene;
     p = new Player(100, 10, 10, 10, 3, playerSprites[0], 1000);
     enemyTimer = new QTimer;
+    enemyTimer->start(3000);
     connect(enemyTimer, &QTimer::timeout, this, &FirstLevelScene::generateEnemy);
 }
 
@@ -47,12 +48,6 @@ int FirstLevelScene::getXPlayerPos()
 int FirstLevelScene::getYPlayerPos()
 {
     return p->getYPos();
-}
-
-void FirstLevelScene::clearScene()
-{
-    enemyTimer->start(3000);
-    s->clear();
 }
 
 void FirstLevelScene::generateEnemy()
