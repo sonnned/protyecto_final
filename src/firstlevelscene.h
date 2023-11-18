@@ -24,6 +24,7 @@ public:
     void modifyPositionDir(int pos);
     int getXPlayerPos();
     int getYPlayerPos();
+    void clearScene();
 private:
     QGraphicsView *g;
     QGraphicsScene *s;
