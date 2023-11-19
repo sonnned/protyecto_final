@@ -18,12 +18,10 @@ class Enemy: public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    Enemy(int id, int targetX, int targetY, int health, int attack, int defense, int speed, int limitOfSprites, std::string characterSprites, int timerInterval);
+    Enemy(int targetX, int targetY, int health, int attack, int defense, int speed, int limitOfSprites, std::string characterSprites, int timerInterval);
     ~Enemy();
     void setIsMoving(bool newIsMoving);
-    int getId() const;
 private:
-    int id = 0;
     int health;
     int attack;
     int defense;

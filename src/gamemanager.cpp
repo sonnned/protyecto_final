@@ -6,6 +6,9 @@ GameManager::GameManager(QGraphicsView *g)
     sLevel = new SecondLevelScene;
     mScene = new MenuScene;
     this->g = g;
+    timer = new QTimer;
+    timer->start(1000);
+    connect(timer, &QTimer::timeout, this, &GameManager::verifyEndLevelScene);
 }
 
 GameManager::~GameManager() {
@@ -13,6 +16,7 @@ GameManager::~GameManager() {
     delete sLevel;
     delete mScene;
     delete g;
+    delete timer;
 }
 
 void GameManager::showLevelScene(int currentLevelScene)
@@ -41,7 +45,6 @@ void GameManager::playerMovement(int pos)
         fLevel->modifyPositionDir(pos);
         fLevel->movePlayer();
     }
-
 }
 
 void GameManager::NaveMovement(char key)
@@ -80,6 +83,21 @@ void GameManager::clearCurrentScene()
         for (QGraphicsItem* item : items) {
             g->scene()->removeItem(item);
             delete item;
+        }
+    }
+}
+
+int GameManager::getCurrentLevelScene() const
+{
+    return currentLevelScene;
+}
+
+void GameManager::verifyEndLevelScene()
+{
+    if (currentLevelScene == 1) {
+        if (fLevel->getDeadEnemies() == 4) {
+            currentLevelScene = 0;
+            clearCurrentScene();
         }
     }
 }
