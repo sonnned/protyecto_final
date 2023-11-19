@@ -21,7 +21,7 @@ private:
     int health;
     int x;
     int y;
-    unsigned int speed = 6;
+    unsigned int speed = 5;
 };
 
 #endif // SPACECRAFT_H

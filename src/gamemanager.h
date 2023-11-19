@@ -26,6 +26,7 @@ public:
     ~GameManager();
     void showLevelScene(int currentLevelScene);
     void playerMovement(int pos);
+    void NaveMovement(char key);
     void playerNoMovement();
 private:
     int currentLevelScene = 0; // 0 -> NADA // 1 -> PRIMER NIVEL // 2 -> SEGUNDO NIVEL

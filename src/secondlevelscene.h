@@ -19,6 +19,7 @@ public:
     SecondLevelScene();
     ~SecondLevelScene();
     void setGraphicsScene(QGraphicsView *g);
+    void movement(char key);
 private:
     QGraphicsView *g;
     QGraphicsScene *s;
@@ -26,9 +27,6 @@ private:
     QBrush *brush;
     QPixmap *spr_nave;
     Spacecraft *nave;
-
-protected:
-     void keyPressEvent(QKeyEvent *event);
 
 };
 

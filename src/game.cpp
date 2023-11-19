@@ -66,15 +66,30 @@ void Game::keyPressEvent(QKeyEvent *e)
         } else if (e->key() == Qt::Key_S) {
             gManager->playerMovement(1);
         } else if (e->key() == Qt::Key_A) {
+            if(currentPage==1){
             gManager->playerMovement(2);
+            }
+            else if(currentPage==2){
+            gManager->NaveMovement('A');
+            }
         } else if (e->key() == Qt::Key_D) {
-            gManager->playerMovement(3);
+            if(currentPage==1){
+             gManager->playerMovement(3);
+            }
+            else if(currentPage==2){
+             gManager->NaveMovement('D');
+            }
         }
     }
-}
+
+
+    }
+
+
 
 void Game::keyReleaseEvent(QKeyEvent *e)
 {
+     if(currentPage==1){
     if (isPlaying) {
         if (e->key() == Qt::Key_W) {
             gManager->playerNoMovement();
@@ -86,6 +101,7 @@ void Game::keyReleaseEvent(QKeyEvent *e)
             gManager->playerNoMovement();
         }
     }
+     }
 }
 
 

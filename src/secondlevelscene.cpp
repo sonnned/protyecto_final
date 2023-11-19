@@ -13,19 +13,6 @@ SecondLevelScene::SecondLevelScene()
 
 }
 
-void SecondLevelScene::keyPressEvent(QKeyEvent *event) {
-
-    if (event->key() == Qt::Key_Left || event->key() == Qt::Key_A) {
-        nave->setPos(nave->getX() - nave->getSpeed(), nave->getY());
-    }
-    else if (event->key() == Qt::Key_Right || event->key() == Qt::Key_D){
-        nave->setPos(nave->getX() + nave->getSpeed(), nave->getY());
-   }
-
-
-}
-
-
 
 void SecondLevelScene::setGraphicsScene(QGraphicsView *g)
 {
@@ -38,6 +25,18 @@ void SecondLevelScene::setGraphicsScene(QGraphicsView *g)
     nave->setPixmap(*spr_nave);
     nave->setPos(nave->getX(),nave->getY());
 
+}
+
+void SecondLevelScene::movement(char key)
+{
+    if(key=='A'){
+        nave->setPos(nave->pos().x()-nave->getSpeed(),nave->pos().y());
+        nave->setX(nave->getX()-nave->getSpeed());
+    }
+    if(key=='D'){
+        nave->setPos(nave->pos().x()+nave->getSpeed(),nave->pos().y());
+         nave->setX(nave->getX()+nave->getSpeed());
+    }
 }
 
 

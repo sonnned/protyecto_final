@@ -31,6 +31,18 @@ void GameManager::playerMovement(int pos)
         fLevel->modifyPositionDir(pos);
         fLevel->movePlayer();
     }
+
+}
+
+void GameManager::NaveMovement(char key)
+{
+    if(currentLevelScene==2){
+        if(key=='A'){
+            sLevel->movement('A');
+        }
+        else if(key=='D')
+            sLevel->movement('D');
+    }
 }
 
 void GameManager::playerNoMovement()
@@ -39,3 +51,4 @@ void GameManager::playerNoMovement()
         fLevel->noMovePlayer();
     }
 }
+
