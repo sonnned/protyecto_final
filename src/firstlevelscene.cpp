@@ -55,10 +55,19 @@ void FirstLevelScene::clearScene()
     s->clear();
 }
 
+void FirstLevelScene::generateBullet(int x, int y)
+{
+    Bullet *newBullet = new Bullet(1, playerSprites[2], 1000);
+    newBullet->setPos(p->getXPos(), p->getYPos());
+    int dir = p->getDir(); // 0 -> UP/1 -> DOWN/2 -> LEFT/3 -> RIGHT
+    newBullet->targetDirection(dir);
+    s->addItem(newBullet);
+}
+
 void FirstLevelScene::generateEnemy()
 {
     int distanceGeneration = 200;
-    int angleOfGeneration = qrand() % 360;
+    int angleOfGeneration = rand() % 360;
 
     int xPos = p->getXPos() + distanceGeneration * std::cos(angleOfGeneration * M_PI / 180);
     int yPos = p->getYPos() + distanceGeneration * std::sin(angleOfGeneration * M_PI / 180);
@@ -66,10 +75,10 @@ void FirstLevelScene::generateEnemy()
     xPos = qBound(0, xPos, static_cast<int>(s->width()));
     yPos = qBound(0, yPos, static_cast<int>(s->height()));
 
-    Enemy *newEnemy = new Enemy(100, 10, 10, 10, 3, playerSprites[1], 1000);
+    Enemy *newEnemy = new Enemy(currentEnemyID, 100, 10, 10, 10, 3, playerSprites[1], 1000);
+    currentEnemyID++;
     newEnemy->setPos(xPos, yPos);
 
     connect(p, &Player::changeEnemyPos, newEnemy, &Enemy::changePosition);
-
     s->addItem(newEnemy);
 }

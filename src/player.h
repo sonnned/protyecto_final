@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include "macros.h"
+#include "enemy.h"
 
 #include <iostream>
 #include <vector>
@@ -12,6 +13,8 @@
 #include <QKeyEvent>
 #include <QGraphicsScene>
 #include <QTransform>
+#include <QList>
+#include <QGraphicsItem>
 
 class Player: public QObject, public QGraphicsPixmapItem
 {
@@ -28,6 +31,7 @@ public:
     void modifyPositionVector(int pos);
     void setIsMoving(bool newIsMoving);
     void movePlayer();
+    int getDir();
 private:
     int health;
     int attack;
@@ -44,6 +48,8 @@ private:
     QTimer *timer;
     QPixmap *sprite;
     void cutSprite();
+    QList <QGraphicsItem*> collitions;
+    void checkCollitions();
 private slots:
     void changeSprite();
 signals:

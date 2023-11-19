@@ -1,7 +1,8 @@
 #include "enemy.h"
 
-Enemy::Enemy(int health, int attack, int defense, int speed, int limitOfSprites, std::string characterSprites, int timerInterval)
+Enemy::Enemy(int id, int health, int attack, int defense, int speed, int limitOfSprites, std::string characterSprites, int timerInterval)
 {
+    this->id = id;
     this->health = health;
     this->attack = attack;
     this->defense = defense;
@@ -23,6 +24,11 @@ Enemy::~Enemy()
 void Enemy::setIsMoving(bool newIsMoving)
 {
     is_moving = newIsMoving;
+}
+
+int Enemy::getId() const
+{
+    return id;
 }
 
 void Enemy::cutSprite()
@@ -52,6 +58,26 @@ void Enemy::followPlayer(int playerX, int playerY)
     }
 }
 
+void Enemy::checkCollitions()
+{
+    collitions = collidingItems();
+
+    for (int i = 0; i < collitions.length(); i++) {
+        if (typeid(*(collitions[i])) == typeid(Bullet)) {
+            health -= 50;
+            scene()->removeItem(collitions[i]);
+            delete collitions[i];
+
+            if (health <= 0) {
+                if (scene()) {
+                    scene()->removeItem(this);
+                    delete this;
+                }
+            }
+        }
+    }
+}
+
 void Enemy::changeSprite() {
     if (is_moving) {
         followPlayer(targetX, targetY);
@@ -59,8 +85,8 @@ void Enemy::changeSprite() {
         if (currentSpriteRows > limitOfSprites) currentSpriteRows = 0;
     }
     cutSprite();
-
     setPixmap(*sprite);
+    checkCollitions();
 }
 
 void Enemy::changePosition(int x, int y)

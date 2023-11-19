@@ -1,9 +1,11 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "gamemanager.h"
+
 #include <QMainWindow>
 #include <QKeyEvent>
-#include "gamemanager.h"
+#include <QMouseEvent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Game; }
@@ -30,5 +32,6 @@ private slots:
     void setLeaveGame();
     void keyPressEvent(QKeyEvent *e);
     void keyReleaseEvent(QKeyEvent *e);
+    void mousePressEvent(QMouseEvent *e);
 };
 #endif // GAME_H

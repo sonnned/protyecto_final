@@ -98,4 +98,15 @@ void Game::keyReleaseEvent(QKeyEvent *e)
     }
 }
 
+void Game::mousePressEvent(QMouseEvent *e)
+{
+    if (isPlaying) {
+        if (e->button() == Qt::LeftButton) {
+            int mouseX = e->pos().x();
+            int mouseY = e->pos().y();
+            gManager->invokeBullet(mouseX, mouseY);
+        }
+    }
+}
+
 

@@ -3,6 +3,7 @@
 
 #include "player.h"
 #include "enemy.h"
+#include "bullet.h"
 
 #include <iostream>
 #include <cmath>
@@ -25,12 +26,14 @@ public:
     int getXPlayerPos();
     int getYPlayerPos();
     void clearScene();
+    void generateBullet(int x, int y);
 private:
     QGraphicsView *g;
     QGraphicsScene *s;
     Player *p;
     QTimer *enemyTimer;
-    std::vector<std::string> playerSprites = {":/spritres/characters/Rick.png", ":/spritres/enemies/Dragonfly.png"};
+    int currentEnemyID = 1;
+    std::vector<std::string> playerSprites = {":/spritres/characters/Rick.png", ":/spritres/enemies/Dragonfly.png", ":/spritres/enemies/car/Projectile.png"};
 private slots:
     void generateEnemy();
 };

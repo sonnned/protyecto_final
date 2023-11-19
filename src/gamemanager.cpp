@@ -51,6 +51,13 @@ void GameManager::playerNoMovement()
     }
 }
 
+void GameManager::invokeBullet(int x, int y)
+{
+    if (currentLevelScene == 1) {
+        fLevel->generateBullet(x, y);
+    }
+}
+
 void GameManager::clearCurrentScene()
 {
     if (currentLevelScene == 1) {

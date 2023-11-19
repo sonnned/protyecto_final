@@ -2,6 +2,7 @@
 #define ENEMY_H
 
 #include "macros.h"
+#include "bullet.h"
 
 #include <iostream>
 #include <vector>
@@ -17,10 +18,12 @@ class Enemy: public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    Enemy(int health, int attack, int defense, int speed, int limitOfSprites, std::string characterSprites, int timerInterval);
+    Enemy(int id, int health, int attack, int defense, int speed, int limitOfSprites, std::string characterSprites, int timerInterval);
     ~Enemy();
     void setIsMoving(bool newIsMoving);
+    int getId() const;
 private:
+    int id = 0;
     int health;
     int attack;
     int defense;
@@ -36,6 +39,8 @@ private:
     QPixmap *sprite;
     void cutSprite();
     void followPlayer(int playerX, int playerY);
+    QList <QGraphicsItem*> collitions;
+    void checkCollitions();
 private slots:
     void changeSprite();
 public slots:

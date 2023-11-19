@@ -84,6 +84,15 @@ void Player::movePlayer()
     }
 }
 
+int Player::getDir()
+{
+    for (int i = 0; i < 4; i++) {
+        if (movementPosition[i] == 1) {
+            return i;
+        }
+    }
+}
+
 void Player::cutSprite()
 {
     QPixmap tempSprite;
@@ -97,6 +106,18 @@ void Player::cutSprite()
     *sprite = sprite->scaled(CHARACTER_SCALED, CHARACTER_SCALED, Qt::KeepAspectRatio);
 }
 
+void Player::checkCollitions()
+{
+    collitions = collidingItems();
+
+    for (int i = 0; i < collitions.length(); i++) {
+        if (typeid(*(collitions[i])) == typeid(Enemy)) {
+            health -= 5;
+            std::cout << "Life: " << health << std::endl;
+        }
+    }
+}
+
 void Player::changeSprite() {
     if (movementPosition[0] == 1) {
         currentSpriteCols = 2;
@@ -107,13 +128,12 @@ void Player::changeSprite() {
     } else if (movementPosition[3] == 1) {
         currentSpriteCols = 3;
     }
-
     if (is_moving) {
         emit changeEnemyPos(this->x(), this->y());
         currentSpriteRows++;
         if (currentSpriteRows > limitOfSprites) currentSpriteRows = 0;
     }
     cutSprite();
-
     setPixmap(*sprite);
+    checkCollitions();
 }

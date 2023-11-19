@@ -28,6 +28,7 @@ public:
     void showMenu();
     void playerMovement(int pos);
     void playerNoMovement();
+    void invokeBullet(int x, int y);
 private:
     int currentLevelScene = 0; // 0 -> NADA // 1 -> PRIMER NIVEL // 2 -> SEGUNDO NIVEL
     QGraphicsView *g;
