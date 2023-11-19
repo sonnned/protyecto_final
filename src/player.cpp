@@ -113,7 +113,7 @@ void Player::checkCollitions()
     for (int i = 0; i < collitions.length(); i++) {
         if (typeid(*(collitions[i])) == typeid(Enemy)) {
             health -= 5;
-            std::cout << "Life: " << health << std::endl;
+            emit changePlayerLife();
         }
     }
 }

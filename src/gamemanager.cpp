@@ -4,12 +4,14 @@ GameManager::GameManager(QGraphicsView *g)
 {
     fLevel = new FirstLevelScene;
     sLevel = new SecondLevelScene;
+    mScene = new MenuScene;
     this->g = g;
 }
 
 GameManager::~GameManager() {
     delete fLevel;
     delete sLevel;
+    delete mScene;
     delete g;
 }
 
@@ -17,12 +19,20 @@ void GameManager::showLevelScene(int currentLevelScene)
 {
     this->currentLevelScene = currentLevelScene;
     g->setVisible(true);
-    g->setWindowTitle("l1");
+
+    clearCurrentScene();
     if (currentLevelScene == 1) {
         fLevel->setGraphicsScene(g);
+        fLevel->startLevel();
     } else if (currentLevelScene == 2) {
         sLevel->setGraphicsScene(g);
     }
+}
+
+void GameManager::showMenu()
+{
+    clearCurrentScene();
+    mScene->set_graphicsview(g);
 }
 
 void GameManager::playerMovement(int pos)

@@ -17,6 +17,7 @@ SOURCES += \
     game.cpp \
     menuscene.cpp \
     player.cpp \
+    playerscore.cpp \
     secondlevelscene.cpp \
     spacecraft.cpp
 
@@ -29,6 +30,7 @@ HEADERS += \
     macros.h \
     menuscene.h \
     player.h \
+    playerscore.h \
     secondlevelscene.h \
     spacecraft.h
 
@@ -44,4 +46,5 @@ RESOURCES += \
     backgrounds.qrc \
     bullet.qrc \
     charactesSprites.qrc \
-    enemies.qrc
+    enemies.qrc \
+    fonts.qrc

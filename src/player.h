@@ -54,6 +54,7 @@ private slots:
     void changeSprite();
 signals:
     void changeEnemyPos(int x, int y);
+    void changePlayerLife();
 };
 
 #endif // PLAYER_H
