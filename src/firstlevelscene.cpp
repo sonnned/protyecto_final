@@ -5,6 +5,7 @@ FirstLevelScene::FirstLevelScene()
     s = new QGraphicsScene;
     p = new Player(100, 10, 10, 10, 3, playerSprites[0], 1000);
     enemyTimer = new QTimer;
+    enemyTimer->start(3000);
     connect(enemyTimer, &QTimer::timeout, this, &FirstLevelScene::generateEnemy);
 }
 

@@ -28,8 +28,8 @@ private:
     int attack;
     int defense;
     int speed;
-    int targetX = 0;
-    int targetY = 0;
+    int targetX;
+    int targetY;
     bool is_moving = true;
     int currentSpriteRows = 0;
     int limitOfSprites;

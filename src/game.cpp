@@ -30,15 +30,7 @@ void Game::changeCurrentPageView()
     this->setVisible(false);
     if (currentPage == 1) gManager->showLevelScene(1);
     else if (currentPage == 2) gManager->showLevelScene(2);
-    else if (currentPage == 3) gManager->showMenu();
     this->show();
-}
-
-void Game::setMenu()
-{
-    currentPage = 3;
-    isPlaying = false;
-    changeCurrentPageView();
 }
 
 void Game::setFirstLevel()
@@ -69,22 +61,31 @@ void Game::keyPressEvent(QKeyEvent *e)
     }
 
     if (isPlaying) {
-        if (e->key() == Qt::Key_Escape) {
-            setMenu();
-        } else if (e->key() == Qt::Key_W) {
+        if (e->key() == Qt::Key_W) {
             gManager->playerMovement(0);
         } else if (e->key() == Qt::Key_S) {
             gManager->playerMovement(1);
         } else if (e->key() == Qt::Key_A) {
-            gManager->playerMovement(2);
+            if (currentPage==1) {
+                gManager->playerMovement(2);
+            } else if (currentPage==2) {
+                gManager->NaveMovement('A');
+            }
         } else if (e->key() == Qt::Key_D) {
-            gManager->playerMovement(3);
+            if (currentPage==1) {
+                gManager->playerMovement(3);
+            } else if (currentPage==2){
+                gManager->NaveMovement('D');
+            }
         }
     }
 }
 
+
+
 void Game::keyReleaseEvent(QKeyEvent *e)
 {
+     if(currentPage==1){
     if (isPlaying) {
         if (e->key() == Qt::Key_W) {
             gManager->playerNoMovement();
@@ -96,6 +97,7 @@ void Game::keyReleaseEvent(QKeyEvent *e)
             gManager->playerNoMovement();
         }
     }
+     }
 }
 
 void Game::mousePressEvent(QMouseEvent *e)

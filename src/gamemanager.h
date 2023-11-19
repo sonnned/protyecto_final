@@ -25,19 +25,16 @@ public:
     GameManager(QGraphicsView *g);
     ~GameManager();
     void showLevelScene(int currentLevelScene);
-    void showMenu();
     void playerMovement(int pos);
+    void NaveMovement(char key);
     void playerNoMovement();
     void invokeBullet(int x, int y);
+    void clearCurrentScene();
 private:
     int currentLevelScene = 0; // 0 -> NADA // 1 -> PRIMER NIVEL // 2 -> SEGUNDO NIVEL
     QGraphicsView *g;
     FirstLevelScene *fLevel;
     SecondLevelScene *sLevel;
-    MenuScene *mScene;
-    void clearCurrentScene();
-private slots:
-    void continueGame();
 };
 
 #endif // GAMEMANAGER_H
