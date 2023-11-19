@@ -30,15 +30,30 @@ void SecondLevelScene::setGraphicsScene(QGraphicsView *g)
 void SecondLevelScene::movement(char key)
 {
     if(key=='A'){
-        nave->setPos(nave->pos().x()-nave->getSpeed(),nave->pos().y());
-        nave->setX(nave->getX()-nave->getSpeed());
+        if(nave->collision_left()==true){
+            nave->setPos(nave->pos().x()+0,nave->pos().y());
+            nave->setX(nave->getX()+0);
+        }
+        else{
+           nave->setPos(nave->pos().x()-nave->getSpeed(),nave->pos().y());
+           nave->setX(nave->getX()-nave->getSpeed());
+        }
+
     }
     if(key=='D'){
-        nave->setPos(nave->pos().x()+nave->getSpeed(),nave->pos().y());
-         nave->setX(nave->getX()+nave->getSpeed());
-    }
+
+        if(nave->collision_right()==true){
+           nave->setPos(nave->pos().x()+0,nave->pos().y());
+           nave->setX(nave->getX()+0);
+        }
+        else{
+           nave->setPos(nave->pos().x()+nave->getSpeed(),nave->pos().y());
+           nave->setX(nave->getX()+nave->getSpeed());
+        }
+
 }
 
+}
 
 
 SecondLevelScene::~SecondLevelScene()

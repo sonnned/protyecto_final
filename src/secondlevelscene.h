@@ -20,6 +20,7 @@ public:
     ~SecondLevelScene();
     void setGraphicsScene(QGraphicsView *g);
     void movement(char key);
+
 private:
     QGraphicsView *g;
     QGraphicsScene *s;
