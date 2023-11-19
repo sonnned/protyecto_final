@@ -1,6 +1,6 @@
 #include "enemy.h"
 
-Enemy::Enemy(int id, int health, int attack, int defense, int speed, int limitOfSprites, std::string characterSprites, int timerInterval)
+Enemy::Enemy(int id, int targetX, int targetY, int health, int attack, int defense, int speed, int limitOfSprites, std::string characterSprites, int timerInterval)
 {
     this->id = id;
     this->health = health;
@@ -10,6 +10,8 @@ Enemy::Enemy(int id, int health, int attack, int defense, int speed, int limitOf
     this->limitOfSprites = limitOfSprites;
     this->characterSprites = characterSprites;
     this->timerInterval = timerInterval;
+    this->targetX = targetX;
+    this->targetY = targetY;
     sprite = new QPixmap;
     this->timer = new QTimer();
     timer->start(timerInterval / 10);
@@ -70,6 +72,7 @@ void Enemy::checkCollitions()
 
             if (health <= 0) {
                 if (scene()) {
+                    emit enemyIsDeath();
                     scene()->removeItem(this);
                     delete this;
                 }

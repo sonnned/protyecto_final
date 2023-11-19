@@ -28,6 +28,7 @@ private:
 private slots:
     void setFirstLevel();
     void setSecondLevel();
+    void setMenu();
     void setLeaveGame();
     void keyPressEvent(QKeyEvent *e);
     void keyReleaseEvent(QKeyEvent *e);
