@@ -6,6 +6,7 @@
 SecondLevelScene::SecondLevelScene()
 {
     s = new QGraphicsScene;
+
     background = new QPixmap(":/spritres/backgrounds/fondo_espacio.jpg");
     brush = new QBrush(*background);
     spr_nave=new QPixmap(":/spritres/characters/nave_morty.png");
@@ -18,6 +19,7 @@ void SecondLevelScene::setGraphicsScene(QGraphicsView *g)
 {
     this->g = g;
     s->setSceneRect(0, 0, g->width() - 2, g->height() - 2);
+
     g->setBackgroundBrush(*brush);
     g->setScene(s);
     s->addItem(nave);
@@ -64,4 +66,5 @@ SecondLevelScene::~SecondLevelScene()
     delete s;
     delete nave;
     delete spr_nave;
+
 }
