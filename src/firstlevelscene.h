@@ -33,9 +33,11 @@ private:
     Player *p;
     QTimer *enemyTimer;
     int currentEnemyID = 1;
+    int amountOfEnemies = 0;
     std::vector<std::string> playerSprites = {":/spritres/characters/Rick.png", ":/spritres/enemies/Dragonfly.png", ":/spritres/enemies/car/Projectile.png"};
 private slots:
     void generateEnemy();
+    void amountOfEnemiesDecrement();
 };
 
 #endif // FIRSTLEVELSCENE_H

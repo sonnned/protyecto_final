@@ -18,7 +18,7 @@ class Enemy: public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    Enemy(int id, int health, int attack, int defense, int speed, int limitOfSprites, std::string characterSprites, int timerInterval);
+    Enemy(int id, int targetX, int targetY, int health, int attack, int defense, int speed, int limitOfSprites, std::string characterSprites, int timerInterval);
     ~Enemy();
     void setIsMoving(bool newIsMoving);
     int getId() const;
@@ -45,6 +45,8 @@ private slots:
     void changeSprite();
 public slots:
     void changePosition(int x, int y);
+signals:
+    void enemyIsDeath();
 };
 
 #endif // ENEMY_H

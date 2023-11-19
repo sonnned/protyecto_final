@@ -52,7 +52,7 @@ int FirstLevelScene::getYPlayerPos()
 
 void FirstLevelScene::clearScene()
 {
-    enemyTimer->start(3000);
+    enemyTimer->start(1000);
     s->clear();
 }
 
@@ -67,19 +67,28 @@ void FirstLevelScene::generateBullet(int x, int y)
 
 void FirstLevelScene::generateEnemy()
 {
-    int distanceGeneration = 200;
-    int angleOfGeneration = rand() % 360;
+    if (amountOfEnemies < 5) {
+        int distanceGeneration = 200;
+        int angleOfGeneration = rand() % 360;
 
-    int xPos = p->getXPos() + distanceGeneration * std::cos(angleOfGeneration * M_PI / 180);
-    int yPos = p->getYPos() + distanceGeneration * std::sin(angleOfGeneration * M_PI / 180);
+        int xPos = p->getXPos() + distanceGeneration * std::cos(angleOfGeneration * M_PI / 180);
+        int yPos = p->getYPos() + distanceGeneration * std::sin(angleOfGeneration * M_PI / 180);
 
-    xPos = qBound(0, xPos, static_cast<int>(s->width()));
-    yPos = qBound(0, yPos, static_cast<int>(s->height()));
+        xPos = qBound(0, xPos, static_cast<int>(s->width()));
+        yPos = qBound(0, yPos, static_cast<int>(s->height()));
 
-    Enemy *newEnemy = new Enemy(currentEnemyID, 100, 10, 10, 10, 3, playerSprites[1], 1000);
-    currentEnemyID++;
-    newEnemy->setPos(xPos, yPos);
+        Enemy *newEnemy = new Enemy(currentEnemyID, p->getXPos(), p->getYPos(), 100, 10, 10, 10, 3, playerSprites[1], 1000);
+        currentEnemyID++;
+        newEnemy->setPos(xPos, yPos);
+        amountOfEnemies++;
 
-    connect(p, &Player::changeEnemyPos, newEnemy, &Enemy::changePosition);
-    s->addItem(newEnemy);
+        connect(p, &Player::changeEnemyPos, newEnemy, &Enemy::changePosition);
+        connect(newEnemy, &Enemy::enemyIsDeath, this, &FirstLevelScene::amountOfEnemiesDecrement);
+        s->addItem(newEnemy);
+    }
+}
+
+void FirstLevelScene::amountOfEnemiesDecrement()
+{
+    amountOfEnemies--;
 }
