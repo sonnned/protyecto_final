@@ -17,6 +17,7 @@ Game::Game(QWidget *parent)
     connect(ui->pushExitBtn, &QPushButton::clicked, this, &Game::setLeaveGame);
     connect(ui->pushLevel1Btn, &QPushButton::clicked, this, &Game::setFirstLevel);
     connect(ui->pushLevel2Btn, &QPushButton::clicked, this, &Game::setSecondLevel);
+
 }
 
 Game::~Game()
