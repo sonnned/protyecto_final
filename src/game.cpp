@@ -13,7 +13,10 @@ Game::Game(QWidget *parent)
     ui->gameGraphics->setVisible(false);
 
     gManager = new GameManager(ui->gameGraphics);
+    timer = new QTimer;
+    timer->start(1000);
 
+    connect(timer, &QTimer::timeout, this, &Game::verifyMainScene);
     connect(ui->pushExitBtn, &QPushButton::clicked, this, &Game::setLeaveGame);
     connect(ui->pushLevel1Btn, &QPushButton::clicked, this, &Game::setFirstLevel);
     connect(ui->pushLevel2Btn, &QPushButton::clicked, this, &Game::setSecondLevel);
@@ -24,6 +27,7 @@ Game::~Game()
 {
     delete ui;
     delete gManager;
+    delete timer;
 }
 
 void Game::changeCurrentPageView()
@@ -39,6 +43,7 @@ void Game::setFirstLevel()
 {
     currentPage = 1;
     isPlaying = true;
+    ui->gameGraphics->setVisible(true);
     changeCurrentPageView();
 
 }
@@ -96,19 +101,19 @@ void Game::keyPressEvent(QKeyEvent *e)
 
 void Game::keyReleaseEvent(QKeyEvent *e)
 {
-     if(currentPage==1){
-    if (isPlaying) {
-        if (e->key() == Qt::Key_W) {
-            gManager->playerNoMovement();
-        } else if (e->key() == Qt::Key_S) {
-            gManager->playerNoMovement();
-        } else if (e->key() == Qt::Key_A) {
-            gManager->playerNoMovement();
-        } else if (e->key() == Qt::Key_D) {
-            gManager->playerNoMovement();
+    if(currentPage==1){
+        if (isPlaying) {
+            if (e->key() == Qt::Key_W) {
+              gManager->playerNoMovement();
+            } else if (e->key() == Qt::Key_S) {
+               gManager->playerNoMovement();
+           } else if (e->key() == Qt::Key_A) {
+               gManager->playerNoMovement();
+          } else if (e->key() == Qt::Key_D) {
+               gManager->playerNoMovement();
+          }
         }
     }
-     }
 }
 
 void Game::mousePressEvent(QMouseEvent *e)
@@ -119,6 +124,14 @@ void Game::mousePressEvent(QMouseEvent *e)
             int mouseY = e->pos().y();
             gManager->invokeBullet(mouseX, mouseY);
         }
+    }
+}
+
+void Game::verifyMainScene()
+{
+    if (gManager->getCurrentLevelScene() == 0) {
+        isPlaying = false;
+        ui->gameGraphics->setVisible(false);
     }
 }
 

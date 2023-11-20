@@ -30,6 +30,8 @@ public:
     void clearScene();
     void generateBullet(int x, int y);
     void startLevel();
+    int getDeadEnemies() const;
+
 private:
     QGraphicsView *g;
     QGraphicsScene *s;
@@ -37,7 +39,6 @@ private:
     QTimer *enemyTimer;
     PlayerScore *pScoreEnemies;
     PlayerScore *pScoreLife;
-    int currentEnemyID = 1;
     int amountOfEnemies = 0;
     int deadEnemies = 0;
     std::vector<std::string> playerSprites = {":/spritres/characters/Rick.png", ":/spritres/enemies/Dragonfly.png", ":/spritres/enemies/car/Projectile.png"};

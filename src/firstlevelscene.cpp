@@ -76,6 +76,11 @@ void FirstLevelScene::startLevel()
     enemyTimer->start(1000);
 }
 
+int FirstLevelScene::getDeadEnemies() const
+{
+    return deadEnemies;
+}
+
 void FirstLevelScene::generateEnemy()
 {
     if (amountOfEnemies < 5) {
@@ -88,8 +93,7 @@ void FirstLevelScene::generateEnemy()
         xPos = qBound(0, xPos, static_cast<int>(s->width()));
         yPos = qBound(0, yPos, static_cast<int>(s->height()));
 
-        Enemy *newEnemy = new Enemy(currentEnemyID, p->getXPos(), p->getYPos(), 100, 10, 10, 10, 3, playerSprites[1], 1000);
-        currentEnemyID++;
+        Enemy *newEnemy = new Enemy(p->getXPos(), p->getYPos(), 100, 10, 10, 10, 3, playerSprites[1], 1000);
         newEnemy->setPos(xPos, yPos);
         amountOfEnemies++;
 

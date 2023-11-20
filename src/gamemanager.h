@@ -14,12 +14,13 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QImage>
+#include <QTimer>
 #include <QBrush>
 #include "ui_game.h"
 
 class Game;
 
-class GameManager
+class GameManager: public QObject
 {
 public:
     GameManager(QGraphicsView *g);
@@ -31,12 +32,15 @@ public:
     void playerNoMovement();
     void invokeBullet(int x, int y);
     void clearCurrentScene();
+    int getCurrentLevelScene() const;
 private:
     int currentLevelScene = 0; // 0 -> NADA // 1 -> PRIMER NIVEL // 2 -> SEGUNDO NIVEL
     QGraphicsView *g;
     FirstLevelScene *fLevel;
     SecondLevelScene *sLevel;
     MenuScene *mScene;
+    QTimer *timer;
+    void verifyEndLevelScene();
 };
 
 #endif // GAMEMANAGER_H

@@ -6,6 +6,7 @@
 #include <QMainWindow>
 #include <QKeyEvent>
 #include <QMouseEvent>
+#include <QTimer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Game; }
@@ -25,6 +26,7 @@ private:
     void changeCurrentPageView();
     bool isPaused = false;
     bool isPlaying = false;
+    QTimer *timer;
 private slots:
     void setFirstLevel();
     void setSecondLevel();
@@ -33,5 +35,6 @@ private slots:
     void keyPressEvent(QKeyEvent *e);
     void keyReleaseEvent(QKeyEvent *e);
     void mousePressEvent(QMouseEvent *e);
+    void verifyMainScene();
 };
 #endif // GAME_H

@@ -1,8 +1,7 @@
 #include "enemy.h"
 
-Enemy::Enemy(int id, int targetX, int targetY, int health, int attack, int defense, int speed, int limitOfSprites, std::string characterSprites, int timerInterval)
+Enemy::Enemy(int targetX, int targetY, int health, int attack, int defense, int speed, int limitOfSprites, std::string characterSprites, int timerInterval)
 {
-    this->id = id;
     this->health = health;
     this->attack = attack;
     this->defense = defense;
@@ -26,11 +25,6 @@ Enemy::~Enemy()
 void Enemy::setIsMoving(bool newIsMoving)
 {
     is_moving = newIsMoving;
-}
-
-int Enemy::getId() const
-{
-    return id;
 }
 
 void Enemy::cutSprite()
