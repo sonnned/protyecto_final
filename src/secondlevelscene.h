@@ -11,7 +11,10 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QGraphicsItem>
-
+#include "background.h"
+#include <QTimer>
+#include <QScrollBar>
+#include "enemies_nave.h"
 class SecondLevelScene:public QGraphicsScene
 {
 public:
@@ -28,7 +31,16 @@ private:
     QBrush *brush;
     QPixmap *spr_nave;
     Spacecraft *nave;
+    QPixmap *spr_enemy;
+    enemies_nave *enemy;
+    QTimer *timer_enemy;
+
+    private slots:
+
+    void move_enemy();
 
 };
+
+
 
 #endif // SECONDLEVELSCENE_H

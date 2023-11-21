@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     background.cpp \
     bullet.cpp \
+    enemies_nave.cpp \
     enemy.cpp \
     firstlevelscene.cpp \
     gamemanager.cpp \
@@ -25,6 +26,7 @@ SOURCES += \
 HEADERS += \
     background.h \
     bullet.h \
+    enemies_nave.h \
     enemy.h \
     firstlevelscene.h \
     game.h \
