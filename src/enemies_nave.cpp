@@ -20,7 +20,6 @@ void enemies_nave::setY(int newY)
     y = newY;
 }
 
-
 int enemies_nave::getSpeed() const
 {
     return speed;

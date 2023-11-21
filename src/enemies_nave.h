@@ -17,7 +17,6 @@ public:
     void setX(int newX);
     int getY() const;
     void setY(int newY);
-
     int getSpeed() const;
     void setSpeed(int newSpeed);
 };

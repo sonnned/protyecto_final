@@ -15,15 +15,17 @@
 #include <QTimer>
 #include <QScrollBar>
 #include "enemies_nave.h"
-class SecondLevelScene:public QGraphicsScene
+#include <QObject>
+class SecondLevelScene:public QGraphicsScene,public QObject
 {
+     Q_OBJECT
 public:
 
     SecondLevelScene();
     ~SecondLevelScene();
     void setGraphicsScene(QGraphicsView *g);
     void movement(char key);
-
+    using QGraphicsScene::connect;
 private:
     QGraphicsView *g;
     QGraphicsScene *s;
@@ -35,9 +37,8 @@ private:
     enemies_nave *enemy;
     QTimer *timer_enemy;
 
-    private slots:
-
-    void move_enemy();
+private slots:
+  void move_enemy();
 
 };
 
