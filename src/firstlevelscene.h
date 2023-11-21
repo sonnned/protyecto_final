@@ -31,7 +31,7 @@ public:
     void generateBullet(int x, int y);
     void startLevel();
     int getDeadEnemies() const;
-
+    void setUpLevel();
 private:
     QGraphicsView *g;
     QGraphicsScene *s;

@@ -21,9 +21,9 @@ GameManager::~GameManager() {
 
 void GameManager::showLevelScene(int currentLevelScene)
 {
+    fLevel = new FirstLevelScene;
     this->currentLevelScene = currentLevelScene;
     g->setVisible(true);
-
     clearCurrentScene();
     if (currentLevelScene == 1) {
         fLevel->setGraphicsScene(g);
@@ -81,8 +81,8 @@ void GameManager::clearCurrentScene()
     if (g->scene()) {
         QList<QGraphicsItem*> items = g->scene()->items();
         for (QGraphicsItem* item : items) {
-            g->scene()->removeItem(item);
-            delete item;
+            //g->scene()->removeItem(item);
+            //delete item;
         }
     }
 }
@@ -95,9 +95,10 @@ int GameManager::getCurrentLevelScene() const
 void GameManager::verifyEndLevelScene()
 {
     if (currentLevelScene == 1) {
-        if (fLevel->getDeadEnemies() == 4) {
-            currentLevelScene = 0;
+        if (fLevel->getDeadEnemies() == 2) {
+            g->setVisible(false);
             clearCurrentScene();
+            currentLevelScene = 0;
         }
     }
 }
