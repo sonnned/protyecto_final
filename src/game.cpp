@@ -43,7 +43,7 @@ void Game::setFirstLevel()
 {
     currentPage = 1;
     isPlaying = true;
-    ui->gameGraphics->setVisible(true);
+    //ui->gameGraphics->setVisible(true);
     changeCurrentPageView();
 
 }
@@ -131,7 +131,7 @@ void Game::verifyMainScene()
 {
     if (gManager->getCurrentLevelScene() == 0) {
         isPlaying = false;
-        ui->gameGraphics->setVisible(false);
+        isPaused = false;
     }
 }
 

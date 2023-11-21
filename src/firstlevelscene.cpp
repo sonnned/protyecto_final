@@ -2,13 +2,7 @@
 
 FirstLevelScene::FirstLevelScene()
 {
-    s = new QGraphicsScene;
-    p = new Player(100, 10, 10, 10, 3, playerSprites[0], 1000);
-    pScoreEnemies = new PlayerScore(QString("Enemies: "), 20, 0, 600, 30);
-    pScoreLife = new PlayerScore(QString("Life: "), 100, 100, 600, 10);
-    enemyTimer = new QTimer;
-    connect(enemyTimer, &QTimer::timeout, this, &FirstLevelScene::generateEnemy);
-    connect(p, &Player::changePlayerLife, pScoreLife, &PlayerScore::decreaseCurrentPlayerLife);
+    setUpLevel();
 }
 
 FirstLevelScene::~FirstLevelScene()
@@ -59,7 +53,8 @@ int FirstLevelScene::getYPlayerPos()
 
 void FirstLevelScene::clearScene()
 {
-    s->clear();
+    //s->clear();
+    enemyTimer->stop();
 }
 
 void FirstLevelScene::generateBullet(int x, int y)
@@ -74,11 +69,24 @@ void FirstLevelScene::generateBullet(int x, int y)
 void FirstLevelScene::startLevel()
 {
     enemyTimer->start(1000);
+    amountOfEnemies = 0;
+    deadEnemies = 0;
 }
 
 int FirstLevelScene::getDeadEnemies() const
 {
     return deadEnemies;
+}
+
+void FirstLevelScene::setUpLevel()
+{
+    s = new QGraphicsScene;
+    p = new Player(100, 10, 10, 10, 3, playerSprites[0], 1000);
+    pScoreEnemies = new PlayerScore(QString("Enemies: "), 20, 0, 600, 30);
+    pScoreLife = new PlayerScore(QString("Life: "), 100, 100, 600, 10);
+    enemyTimer = new QTimer;
+    connect(enemyTimer, &QTimer::timeout, this, &FirstLevelScene::generateEnemy);
+    connect(p, &Player::changePlayerLife, pScoreLife, &PlayerScore::decreaseCurrentPlayerLife);
 }
 
 void FirstLevelScene::generateEnemy()
