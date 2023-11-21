@@ -12,10 +12,9 @@ SecondLevelScene::SecondLevelScene()
     nave=new Spacecraft(10,200,400);
     spr_enemy=new QPixmap(":/spritres/enemies/nave_enemiga.png");
     enemy=new enemies_nave(10,0);
-     timer_enemy=new QTimer(this);
+     timer_enemy=new QTimer();
      timer_enemy->start(100);
-    SecondLevelScene::QGraphicsScene::connect(timer_enemy,SIGNAL(timeout()),this,SLOT(move_enemy()));
-
+    connect(timer_enemy,SIGNAL(timeout()),this,SLOT(move_enemy()));
 }
 
 

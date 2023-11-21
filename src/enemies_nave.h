@@ -9,7 +9,7 @@ class enemies_nave : public QGraphicsPixmapItem
 private:
     int x;
     int y;
-    int speed=10;
+    int speed=30;
 public:
     enemies_nave();
     enemies_nave(int x, int y);

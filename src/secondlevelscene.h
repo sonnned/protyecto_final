@@ -16,16 +16,17 @@
 #include <QScrollBar>
 #include "enemies_nave.h"
 #include <QObject>
-class SecondLevelScene:public QGraphicsScene,public QObject
+class SecondLevelScene:public QObject
 {
      Q_OBJECT
 public:
 
     SecondLevelScene();
-    ~SecondLevelScene();
+    virtual ~SecondLevelScene();
+    //~SecondLevelScene();
     void setGraphicsScene(QGraphicsView *g);
     void movement(char key);
-    using QGraphicsScene::connect;
+
 private:
     QGraphicsView *g;
     QGraphicsScene *s;
