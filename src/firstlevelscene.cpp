@@ -89,6 +89,7 @@ void FirstLevelScene::setUpLevel()
 {
     s = new QGraphicsScene;
     p = new Player(100, 10, 10, 10, 3, playerSprites[0], 1000);
+    p->setPos(400 - 125 / 2, 300 - 162 / 2);
     pScoreEnemies = new PlayerScore(QString("Enemies: "), 20, 0, 600, 30);
     pScoreLife = new PlayerScore(QString("Life: "), 100, 100, 600, 10);
     enemyTimer = new QTimer;
