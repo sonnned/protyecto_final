@@ -37,7 +37,7 @@ private:
     void paintBullet();
     int direction;
     void moveBullet();
-    int bulletSpeed = 10;
+    int bulletSpeed = 20;
     void deleteBullet();
 private slots:
     void changeSprite();
