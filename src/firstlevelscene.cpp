@@ -61,7 +61,7 @@ void FirstLevelScene::clearScene()
 void FirstLevelScene::generateBullet(int x, int y)
 {
     if (amountOfBullets < 4) {
-        Bullet *newBullet = new Bullet(1, playerSprites[2], 1000);
+        Bullet *newBullet = new Bullet(1, playerSprites[3], 1000);
         newBullet->setPos(p->getXPos() + (CHARACTER_WEIGHT / 4), p->getYPos() + (CHARACTER_HEIGHT / 4));
         int dir = p->getDir(); // 0 -> UP/1 -> DOWN/2 -> LEFT/3 -> RIGHT
         newBullet->targetDirection(dir);
@@ -110,7 +110,7 @@ void FirstLevelScene::generateEnemy()
         xPos = qBound(0, xPos, static_cast<int>(s->width()));
         yPos = qBound(0, yPos, static_cast<int>(s->height()));
 
-        Enemy *newEnemy = new Enemy(p->getXPos(), p->getYPos(), 100, 10, 10, enemyVel, 3, playerSprites[1], 1000);
+        Enemy *newEnemy = new Enemy(p->getXPos(), p->getYPos(), 100, 10, 10, enemyVel, 3, playerSprites[1 + rand() % 2], 1000);
         newEnemy->setPos(xPos, yPos);
         amountOfEnemies++;
 
