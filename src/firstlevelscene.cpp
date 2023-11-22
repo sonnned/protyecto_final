@@ -110,7 +110,8 @@ void FirstLevelScene::generateEnemy()
         xPos = qBound(0, xPos, static_cast<int>(s->width()));
         yPos = qBound(0, yPos, static_cast<int>(s->height()));
 
-        Enemy *newEnemy = new Enemy(p->getXPos(), p->getYPos(), 100, 10, 10, (enemyVel / 2) + (rand() % enemyVel), 3, playerSprites[1 + rand() % 2], 1000);
+        int id = 1 + rand() % 2;
+        Enemy *newEnemy = new Enemy(p->getXPos(), p->getYPos(), id == 2 ? 200 : 100, 10, 10, (enemyVel / 2) + (rand() % enemyVel), 3, playerSprites[id], 1000);
         newEnemy->setPos(xPos, yPos);
         amountOfEnemies++;
 
