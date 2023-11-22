@@ -42,9 +42,12 @@ private:
     int amountOfEnemies = 0;
     int deadEnemies = 0;
     std::vector<std::string> playerSprites = {":/spritres/characters/Rick.png", ":/spritres/enemies/Dragonfly.png", ":/spritres/enemies/car/Projectile.png"};
+    int amountOfBullets = 0;
+    QTimer *bulletTimer;
 private slots:
     void generateEnemy();
     void amountOfEnemiesDecrement();
+    void shootBullet();
 };
 
 #endif // FIRSTLEVELSCENE_H
