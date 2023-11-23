@@ -14,6 +14,7 @@ FirstLevelScene::~FirstLevelScene()
     delete pScoreEnemies;
     delete pScoreLife;
     delete bulletTimer;
+    delete backgroundItem;
 }
 
 void FirstLevelScene::setGraphicsScene(QGraphicsView *g)
@@ -94,8 +95,15 @@ void FirstLevelScene::setUpLevel()
     pScoreLife = new PlayerScore(QString("Life: "), 100, 100, 600, 10);
     enemyTimer = new QTimer;
     this->bulletTimer = new QTimer;
+    setBackground();
     connect(enemyTimer, &QTimer::timeout, this, &FirstLevelScene::generateEnemy);
     connect(p, &Player::changePlayerLife, pScoreLife, &PlayerScore::decreaseCurrentPlayerLife);
+}
+
+void FirstLevelScene::setBackground()
+{
+    backgroundItem = new QGraphicsPixmapItem(QPixmap(QString::fromStdString(background)));
+    s->addItem(backgroundItem);
 }
 
 void FirstLevelScene::generateEnemy()
@@ -111,7 +119,7 @@ void FirstLevelScene::generateEnemy()
         yPos = qBound(0, yPos, static_cast<int>(s->height()));
 
         int id = 1 + rand() % 2;
-        Enemy *newEnemy = new Enemy(p->getXPos(), p->getYPos(), id == 2 ? 200 : 100, 10, 10, (enemyVel / 2) + (rand() % enemyVel), 3, playerSprites[id], 1000);
+        Enemy *newEnemy = new Enemy(p->getXPos(), p->getYPos(), id * 100, 10, 10, (enemyVel / 2) + (rand() % enemyVel), 3, playerSprites[id], 1000);
         newEnemy->setPos(xPos, yPos);
         amountOfEnemies++;
 

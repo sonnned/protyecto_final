@@ -95,7 +95,7 @@ int GameManager::getCurrentLevelScene() const
 void GameManager::verifyEndLevelScene()
 {
     if (currentLevelScene == 1) {
-        if (fLevel->getDeadEnemies() == 2) {
+        if (fLevel->getDeadEnemies() == 20) {
             g->setVisible(false);
             clearCurrentScene();
             currentLevelScene = 0;

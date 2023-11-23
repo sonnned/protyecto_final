@@ -15,6 +15,9 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QString>
+#include <QImage>
+#include <QBrush>
+#include <QPixmap>
 
 class FirstLevelScene: public QObject
 {
@@ -41,10 +44,13 @@ private:
     PlayerScore *pScoreLife;
     int amountOfEnemies = 0;
     int deadEnemies = 0;
+    const std::string background = ":/spritres/backgrounds/level_1_background.jpg";
+    QGraphicsPixmapItem *backgroundItem;
     std::vector<std::string> playerSprites = {":/spritres/characters/Rick.png", ":/spritres/enemies/Dragonfly.png", ":/spritres/enemies/Twig.png", ":/spritres/enemies/car/Projectile.png"};
     int amountOfBullets = 0;
     QTimer *bulletTimer;
     int enemyVel = 10;
+    void setBackground();
 private slots:
     void generateEnemy();
     void amountOfEnemiesDecrement();
