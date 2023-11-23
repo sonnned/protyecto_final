@@ -11,12 +11,10 @@ SecondLevelScene::SecondLevelScene()
     spr_nave=new QPixmap(":/spritres/characters/nave_morty.png");
     nave=new Spacecraft(10,200,400);
     spr_enemy=new QPixmap(":/spritres/enemies/nave_enemiga.png");
-    enemy=new enemies_nave(100,100);
-    timer_enemy=new QTimer(this);
-    //timer_enemy->start(100);
+    enemy=new enemies_nave(10,0);
+     timer_enemy=new QTimer();
+     timer_enemy->start(100);
     connect(timer_enemy,SIGNAL(timeout()),this,SLOT(move_enemy()));
-
-
 }
 
 
@@ -34,6 +32,7 @@ void SecondLevelScene::setGraphicsScene(QGraphicsView *g)
     nave->setPos(nave->getX(),nave->getY());
     enemy->setPixmap(*spr_enemy);
     enemy->setPos(enemy->getX(),enemy->getY());
+
 
 }
 
@@ -68,6 +67,7 @@ void SecondLevelScene::movement(char key)
 void SecondLevelScene::move_enemy()
 {
 enemy->setPos(enemy->pos().x(),enemy->pos().y()+enemy->getSpeed());
+enemy->setY(enemy->getSpeed());
 }
 
 SecondLevelScene::~SecondLevelScene()

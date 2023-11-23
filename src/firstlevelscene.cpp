@@ -13,6 +13,7 @@ FirstLevelScene::~FirstLevelScene()
     delete enemyTimer;
     delete pScoreEnemies;
     delete pScoreLife;
+    delete bulletTimer;
 }
 
 void FirstLevelScene::setGraphicsScene(QGraphicsView *g)
@@ -59,11 +60,17 @@ void FirstLevelScene::clearScene()
 
 void FirstLevelScene::generateBullet(int x, int y)
 {
-    Bullet *newBullet = new Bullet(1, playerSprites[2], 1000);
-    newBullet->setPos(p->getXPos() + (CHARACTER_WEIGHT / 4), p->getYPos() + (CHARACTER_HEIGHT / 4));
-    int dir = p->getDir(); // 0 -> UP/1 -> DOWN/2 -> LEFT/3 -> RIGHT
-    newBullet->targetDirection(dir);
-    s->addItem(newBullet);
+    if (amountOfBullets < 4) {
+        Bullet *newBullet = new Bullet(1, playerSprites[3], 1000);
+        newBullet->setPos(p->getXPos() + (CHARACTER_WEIGHT / 4), p->getYPos() + (CHARACTER_HEIGHT / 4));
+        int dir = p->getDir(); // 0 -> UP/1 -> DOWN/2 -> LEFT/3 -> RIGHT
+        newBullet->targetDirection(dir);
+        s->addItem(newBullet);
+        amountOfBullets++;
+    } else if (bulletTimer->remainingTime() == -1) {
+        bulletTimer->start(1500);
+        connect(bulletTimer, &QTimer::timeout, this, &FirstLevelScene::shootBullet);
+    }
 }
 
 void FirstLevelScene::startLevel()
@@ -82,9 +89,11 @@ void FirstLevelScene::setUpLevel()
 {
     s = new QGraphicsScene;
     p = new Player(100, 10, 10, 10, 3, playerSprites[0], 1000);
+    p->setPos(400 - 125 / 2, 300 - 162 / 2);
     pScoreEnemies = new PlayerScore(QString("Enemies: "), 20, 0, 600, 30);
     pScoreLife = new PlayerScore(QString("Life: "), 100, 100, 600, 10);
     enemyTimer = new QTimer;
+    this->bulletTimer = new QTimer;
     connect(enemyTimer, &QTimer::timeout, this, &FirstLevelScene::generateEnemy);
     connect(p, &Player::changePlayerLife, pScoreLife, &PlayerScore::decreaseCurrentPlayerLife);
 }
@@ -101,7 +110,8 @@ void FirstLevelScene::generateEnemy()
         xPos = qBound(0, xPos, static_cast<int>(s->width()));
         yPos = qBound(0, yPos, static_cast<int>(s->height()));
 
-        Enemy *newEnemy = new Enemy(p->getXPos(), p->getYPos(), 100, 10, 10, 10, 3, playerSprites[1], 1000);
+        int id = 1 + rand() % 2;
+        Enemy *newEnemy = new Enemy(p->getXPos(), p->getYPos(), id == 2 ? 200 : 100, 10, 10, (enemyVel / 2) + (rand() % enemyVel), 3, playerSprites[id], 1000);
         newEnemy->setPos(xPos, yPos);
         amountOfEnemies++;
 
@@ -116,4 +126,11 @@ void FirstLevelScene::amountOfEnemiesDecrement()
 {
     amountOfEnemies--;
     deadEnemies++;
+    enemyVel += 4;
+}
+
+void FirstLevelScene::shootBullet()
+{
+    amountOfBullets = 0;
+    bulletTimer->stop();
 }

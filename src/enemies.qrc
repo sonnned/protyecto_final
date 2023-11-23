@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>spritres/enemies/Dragonfly.png</file>
         <file>spritres/enemies/nave_enemiga.png</file>
+        <file>spritres/enemies/Twig.png</file>
     </qresource>
 </RCC>
