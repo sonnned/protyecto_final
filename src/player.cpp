@@ -95,6 +95,17 @@ int Player::getDir()
     }
 }
 
+int Player::getCurrentBullets() const
+{
+    return currentBullets;
+}
+
+void Player::setCurrentBullets(int newCurrentBullets)
+{
+    currentBullets = newCurrentBullets;
+    emit changeCurrentBullets(currentBullets);
+}
+
 void Player::cutSprite()
 {
     QPixmap tempSprite;

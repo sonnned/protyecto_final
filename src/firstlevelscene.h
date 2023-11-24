@@ -42,6 +42,7 @@ private:
     QTimer *enemyTimer;
     PlayerScore *pScoreEnemies;
     PlayerScore *pScoreLife;
+    PlayerScore *pCurrentBullets;
     int amountOfEnemies = 0;
     int deadEnemies = 0;
     const std::string background = ":/spritres/backgrounds/level_1_background.jpg";

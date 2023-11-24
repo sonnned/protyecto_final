@@ -15,6 +15,7 @@ FirstLevelScene::~FirstLevelScene()
     delete pScoreLife;
     delete bulletTimer;
     delete backgroundItem;
+    delete pCurrentBullets;
 }
 
 void FirstLevelScene::setGraphicsScene(QGraphicsView *g)
@@ -24,6 +25,7 @@ void FirstLevelScene::setGraphicsScene(QGraphicsView *g)
     s->addItem(p);
     s->addItem(pScoreEnemies);
     s->addItem(pScoreLife);
+    s->addItem(pCurrentBullets);
     g->setScene(s);
 }
 
@@ -68,8 +70,10 @@ void FirstLevelScene::generateBullet(int x, int y)
         newBullet->targetDirection(dir);
         s->addItem(newBullet);
         amountOfBullets++;
-    } else if (bulletTimer->remainingTime() == -1) {
-        bulletTimer->start(1500);
+        p->setCurrentBullets(p->getCurrentBullets() - 1);
+    }
+    if (bulletTimer->remainingTime() == -1 || amountOfBullets == 4) {
+        bulletTimer->start(2000);
         connect(bulletTimer, &QTimer::timeout, this, &FirstLevelScene::shootBullet);
     }
 }
@@ -91,13 +95,15 @@ void FirstLevelScene::setUpLevel()
     s = new QGraphicsScene;
     p = new Player(100, 10, 10, 10, 3, playerSprites[0], 1000);
     p->setPos(400 - 125 / 2, 300 - 162 / 2);
-    pScoreEnemies = new PlayerScore(QString("Enemies: "), 20, 0, 600, 30);
-    pScoreLife = new PlayerScore(QString("Life: "), 100, 100, 600, 10);
+    pScoreLife = new PlayerScore(QString("Life: "), 100, 100, 600, 5);
+    pScoreEnemies = new PlayerScore(QString("Enemies: "), 20, 0, 600, 25);
+    pCurrentBullets = new PlayerScore(QString("Bullets: "), 4, 4, 600, 45);
     enemyTimer = new QTimer;
     this->bulletTimer = new QTimer;
     setBackground();
     connect(enemyTimer, &QTimer::timeout, this, &FirstLevelScene::generateEnemy);
     connect(p, &Player::changePlayerLife, pScoreLife, &PlayerScore::decreaseCurrentPlayerLife);
+    connect(p, &Player::changeCurrentBullets, pCurrentBullets, &PlayerScore::changeCurrentBullets);
 }
 
 void FirstLevelScene::setBackground()
@@ -140,5 +146,6 @@ void FirstLevelScene::amountOfEnemiesDecrement()
 void FirstLevelScene::shootBullet()
 {
     amountOfBullets = 0;
+    p->setCurrentBullets(4);
     bulletTimer->stop();
 }

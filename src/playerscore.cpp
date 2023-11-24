@@ -31,3 +31,12 @@ void PlayerScore::decreaseCurrentPlayerLife()
         setPlainText(scoreText);
     }
 }
+
+void PlayerScore::changeCurrentBullets(int bullets)
+{
+    if (initialBeg == 4) {
+        beg = bullets;
+        QString scoreText = text + QString::number(beg) + QString("/") + QString::number(limit);
+        setPlainText(scoreText);
+    }
+}
