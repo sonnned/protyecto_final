@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>spritres/backgrounds/fondo_espacio.jpg</file>
         <file>spritres/backgrounds/level_1_background.jpg</file>
+        <file>spritres/backgrounds/rick_and_morty_menu_background.jpg</file>
     </qresource>
 </RCC>
