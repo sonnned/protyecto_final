@@ -10,10 +10,10 @@ SecondLevelScene::SecondLevelScene()
     brush = new QBrush(*background);
     spr_nave=new QPixmap(":/spritres/characters/nave_morty.png");
     nave=new Spacecraft(10,200,400);
-     timer_enemy=new QTimer();
-     timer_enemy->start(100);
-     connect(timer_enemy,SIGNAL(timeout()),this,SLOT(generate_enemy()));
-     connect(timer_enemy,SIGNAL(timeout()),this,SLOT(move_enemy()));
+    // timer_enemy=new QTimer();
+     //timer_enemy->start(100);
+  //  connect(timer_enemy,SIGNAL(timeout()),this,SLOT(generate_enemy()));
+   //  connect(timer_enemy,SIGNAL(timeout()),this,SLOT(move_enemy()));
 
 }
 
@@ -62,7 +62,7 @@ void SecondLevelScene::movement(char key)
 }
 
 }
-
+/*
 void SecondLevelScene::move_enemy()
 {
 for(int i=1;i<=enemies.size();i++){
@@ -90,7 +90,7 @@ enemies.push_back(enemy);
 }
 
 }
-
+*/
 SecondLevelScene::~SecondLevelScene()
 {
     delete background;
@@ -101,6 +101,6 @@ SecondLevelScene::~SecondLevelScene()
     delete spr_nave;
     delete spr_enemy;
     delete enemy;
-    delete timer_enemy;
+   // delete timer_enemy;
 
 }
