@@ -10,11 +10,11 @@ SecondLevelScene::SecondLevelScene()
     brush = new QBrush(*background);
     spr_nave=new QPixmap(":/spritres/characters/nave_morty.png");
     nave=new Spacecraft(10,200,400);
-    spr_enemy=new QPixmap(":/spritres/enemies/nave_enemiga.png");
-    enemy=new enemies_nave(10,0);
      timer_enemy=new QTimer();
      timer_enemy->start(100);
-    connect(timer_enemy,SIGNAL(timeout()),this,SLOT(move_enemy()));
+     connect(timer_enemy,SIGNAL(timeout()),this,SLOT(generate_enemy()));
+     connect(timer_enemy,SIGNAL(timeout()),this,SLOT(move_enemy()));
+
 }
 
 
@@ -26,12 +26,11 @@ void SecondLevelScene::setGraphicsScene(QGraphicsView *g)
     g->setBackgroundBrush(*brush);
     g->setScene(s);
     s->addItem(nave);
-    s->addItem(enemy);
     nave->setScale(0.5);
     nave->setPixmap(*spr_nave);
     nave->setPos(nave->getX(),nave->getY());
-    enemy->setPixmap(*spr_enemy);
-    enemy->setPos(enemy->getX(),enemy->getY());
+
+
 
 
 }
@@ -66,8 +65,30 @@ void SecondLevelScene::movement(char key)
 
 void SecondLevelScene::move_enemy()
 {
-enemy->setPos(enemy->pos().x(),enemy->pos().y()+enemy->getSpeed());
-enemy->setY(enemy->getSpeed());
+for(int i=1;i<=enemies.size();i++){
+    enemies[i]->setPos(enemies[i]->pos().x(),enemies[i]->pos().y()+enemies[i]->getSpeed());
+        enemies[i]->setY(enemies[i]->getSpeed());
+}
+}
+
+
+
+
+void SecondLevelScene::generate_enemy()
+{
+//798
+
+if (amount_enemies<5){
+spr_enemy=new QPixmap(":/spritres/enemies/nave_enemiga.png");
+enemy=new enemies_nave(rand()% 790,0);
+enemy->setPixmap(*spr_enemy);
+enemy->setPos(enemy->getX(),enemy->getY());
+s->addItem(enemy);
+amount_enemies++;
+enemies.push_back(enemy);
+
+}
+
 }
 
 SecondLevelScene::~SecondLevelScene()

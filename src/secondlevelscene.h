@@ -16,6 +16,7 @@
 #include <QScrollBar>
 #include "enemies_nave.h"
 #include <QObject>
+#include <stdlib.h>
 class SecondLevelScene:public QObject
 {
      Q_OBJECT
@@ -37,9 +38,13 @@ private:
     QPixmap *spr_enemy;
     enemies_nave *enemy;
     QTimer *timer_enemy;
+    int amount_enemies=0;
+    QVector<enemies_nave*> enemies;
+
 
 private slots:
   void move_enemy();
+    void generate_enemy();
 
 };
 
