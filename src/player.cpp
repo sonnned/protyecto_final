@@ -69,6 +69,7 @@ void Player::movePlayer()
     if (movementPosition[0] == 1) {
         setPos(this->x(), this->y() - 4);
         if (this->y() < 0) setPos(this->x(), this->y() + 4);
+        if (this->x() > 520 && this->y() < 60) setPos(this->x(), 60);
     }
     else if (movementPosition[1] == 1) {
         setPos(this->x(), this->y() + 4);
@@ -81,6 +82,7 @@ void Player::movePlayer()
     else if (movementPosition[3] == 1) {
         setPos(this->x() + 4, this->y());
         if (this->x() > 736) setPos(736, this->y());
+        if (this->x() > 520 && this->y() < 60) setPos(520, this->y());
     }
 }
 
@@ -91,6 +93,17 @@ int Player::getDir()
             return i;
         }
     }
+}
+
+int Player::getCurrentBullets() const
+{
+    return currentBullets;
+}
+
+void Player::setCurrentBullets(int newCurrentBullets)
+{
+    currentBullets = newCurrentBullets;
+    emit changeCurrentBullets(currentBullets);
 }
 
 void Player::cutSprite()

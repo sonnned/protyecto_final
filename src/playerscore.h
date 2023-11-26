@@ -19,6 +19,7 @@ private:
 public slots:
     void increaseCurrentDeadEnemies();
     void decreaseCurrentPlayerLife();
+    void changeCurrentBullets(int bullets);
 };
 
 #endif // PLAYERSCORE_H

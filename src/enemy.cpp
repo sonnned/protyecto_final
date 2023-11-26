@@ -60,7 +60,7 @@ void Enemy::checkCollitions()
 
     for (int i = 0; i < collitions.length(); i++) {
         if (typeid(*(collitions[i])) == typeid(Bullet)) {
-            health -= 50;
+            health -= 100;
             scene()->removeItem(collitions[i]);
             delete collitions[i];
 

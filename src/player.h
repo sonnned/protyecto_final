@@ -32,11 +32,14 @@ public:
     void setIsMoving(bool newIsMoving);
     void movePlayer();
     int getDir();
+    int getCurrentBullets() const;
+    void setCurrentBullets(int newCurrentBullets);
 private:
     int health;
     int attack;
     int defense;
     int speed;
+    int currentBullets = 4;
     bool is_moving = false;
     int currentSpriteRows = 0;
     int currentSpriteCols = 0;
@@ -55,6 +58,7 @@ private slots:
 signals:
     void changeEnemyPos(int x, int y);
     void changePlayerLife();
+    void changeCurrentBullets(int bullets);
 };
 
 #endif // PLAYER_H
