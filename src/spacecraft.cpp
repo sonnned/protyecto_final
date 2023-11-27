@@ -45,7 +45,7 @@ void Spacecraft::setSpeed(unsigned int newSpeed)
 
 bool Spacecraft::collision_right()
 {
-    if(x>540){
+    if(x>660){
         return true;
     }
     else{
@@ -55,7 +55,7 @@ bool Spacecraft::collision_right()
 
 bool Spacecraft::collision_left()
 {
-    if(x<-87){
+    if(x<0){
         return true;
     }
     else{

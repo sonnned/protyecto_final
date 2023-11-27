@@ -37,14 +37,15 @@ private:
     Spacecraft *nave;
     QPixmap *spr_enemy;
     enemies_nave *enemy;
-  // QTimer *timer_enemy;
+    QTimer *timer_move_enemy;
+    QTimer *timer_enemy;
     int amount_enemies=0;
-   // QVector<enemies_nave*> enemies;
+    QVector<enemies_nave*> enemies;
 
 
 private slots:
-  //void move_enemy();
-  //  void generate_enemy();
+  void move_enemy();
+  void generate_enemy();
 
 };
 
