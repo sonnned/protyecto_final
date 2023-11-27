@@ -39,13 +39,16 @@ private:
     enemies_nave *enemy;
     QTimer *timer_move_enemy;
     QTimer *timer_enemy;
-    int amount_enemies=0;
+    QTimer *timer_asteroid;
+    QPixmap *spr_asteroid;
+    enemies_nave *asteroid;
     QVector<enemies_nave*> enemies;
 
 
 private slots:
   void move_enemy();
   void generate_enemy();
+  void generate_asteroid();
 
 };
 

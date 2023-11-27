@@ -11,9 +11,12 @@ SecondLevelScene::SecondLevelScene()
     spr_nave=new QPixmap(":/spritres/characters/nave_morty.png");
     nave=new Spacecraft(10,200,400);
      timer_enemy=new QTimer();
-     timer_enemy->start(2000);
+     timer_enemy->start(4000);
      timer_move_enemy=new QTimer();
      timer_move_enemy->start(50);
+    timer_asteroid=new QTimer();
+     timer_asteroid->start(1000);
+     connect(timer_asteroid,SIGNAL(timeout()),this,SLOT(generate_asteroid()));
     connect(timer_enemy,SIGNAL(timeout()),this,SLOT(generate_enemy()));
     connect(timer_move_enemy,SIGNAL(timeout()),this,SLOT(move_enemy()));
 
@@ -70,13 +73,15 @@ void SecondLevelScene::move_enemy()
 for(int i=0;i<enemies.size();i++){
     enemies[i]->setPos(enemies[i]->pos().x(),enemies[i]->pos().y()+enemies[i]->getSpeed());
         enemies[i]->setY(enemies[i]->getY()+enemies[i]->getSpeed());
-/*
-    if(enemies[i]->getY()>80){
+
+    if(enemies[i]->getY()>700){
            s->removeItem(enemies[i]);
            delete enemies[i];
+           enemies.erase(std::remove(enemies.begin(), enemies.end(), enemies[i]), enemies.end());
+
 
         }
-*/
+
 }
 }
 
@@ -93,18 +98,21 @@ enemy=new enemies_nave(rand()% 700,0);
 enemy->setPixmap(*spr_enemy);
 enemy->setPos(enemy->getX(),enemy->getY());
 s->addItem(enemy);
-amount_enemies++;
 enemies.push_back(enemy);
 
 
+}
 
+void SecondLevelScene::generate_asteroid()
+{
 
-
-
-
-
-
-
+spr_asteroid=new QPixmap(":/spritres/enemies/asteroide.png");
+asteroid=new enemies_nave(rand()% 700,0);
+asteroid->setPixmap(*spr_asteroid);
+asteroid->setPos(asteroid->getX(),asteroid->getY());
+s->addItem(asteroid);
+asteroid->setScale(0.4);
+enemies.push_back(asteroid);
 }
 
 SecondLevelScene::~SecondLevelScene()
