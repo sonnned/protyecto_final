@@ -43,7 +43,7 @@ private:
     QPixmap *spr_asteroid;
     enemies_nave *asteroid;
     QVector<enemies_nave*> enemies;
-
+    QGraphicsRectItem *scroll;
 
 private slots:
   void move_enemy();

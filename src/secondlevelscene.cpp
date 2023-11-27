@@ -34,7 +34,7 @@ void SecondLevelScene::setGraphicsScene(QGraphicsView *g)
     nave->setScale(0.4);
     nave->setPixmap(*spr_nave);
     nave->setPos(nave->getX(),nave->getY());
-
+    scroll=s->addRect(40,30,30,30,,brush);
 
 
 
@@ -111,7 +111,7 @@ asteroid=new enemies_nave(rand()% 700,0);
 asteroid->setPixmap(*spr_asteroid);
 asteroid->setPos(asteroid->getX(),asteroid->getY());
 s->addItem(asteroid);
-asteroid->setScale(0.4);
+asteroid->setScale(0.3);
 enemies.push_back(asteroid);
 }
 
