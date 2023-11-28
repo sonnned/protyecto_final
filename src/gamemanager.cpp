@@ -30,6 +30,7 @@ void GameManager::showLevelScene(int currentLevelScene)
         fLevel->startLevel();
     } else if (currentLevelScene == 2) {
         sLevel->setGraphicsScene(g);
+        sLevel->startLevel();
     }
 }
 
@@ -77,6 +78,7 @@ void GameManager::clearCurrentScene()
     if (currentLevelScene == 1) {
         fLevel->clearScene();
     } else if (currentLevelScene == 2) {
+        sLevel->clearScene();
     }
     if (g->scene()) {
         QList<QGraphicsItem*> items = g->scene()->items();

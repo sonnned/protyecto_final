@@ -27,6 +27,8 @@ public:
     //~SecondLevelScene();
     void setGraphicsScene(QGraphicsView *g);
     void movement(char key);
+    void startLevel();
+    void clearScene();
 
 private:
     QGraphicsView *g;
@@ -50,7 +52,7 @@ private slots:
   void move_enemy();
   void generate_enemy();
   void generate_asteroid();
-  void collision();
+ // void collision();
 
 };
 

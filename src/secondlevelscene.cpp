@@ -11,13 +11,13 @@ SecondLevelScene::SecondLevelScene()
     spr_nave=new QPixmap(":/spritres/characters/nave_morty.png");
     nave=new Spacecraft(10,200,400);
      timer_enemy=new QTimer();
-     timer_enemy->start(4000);
+    // timer_enemy->start(4000);
      timer_move_enemy=new QTimer();
-     timer_move_enemy->start(50);
+    // timer_move_enemy->start(50);
      timer_asteroid=new QTimer();
-     timer_asteroid->start(1000);
+     //timer_asteroid->start(1000);
      col=new QTimer();
-     col->start();
+     //col->start();
      connect(timer_asteroid,SIGNAL(timeout()),this,SLOT(generate_asteroid()));
     connect(timer_enemy,SIGNAL(timeout()),this,SLOT(generate_enemy()));
     connect(timer_move_enemy,SIGNAL(timeout()),this,SLOT(move_enemy()));
@@ -70,6 +70,22 @@ void SecondLevelScene::movement(char key)
 
 }
 
+void SecondLevelScene::startLevel()
+{
+timer_enemy->start(4000);
+timer_move_enemy->start(50);
+timer_asteroid->start(1000);
+col->start();
+}
+
+void SecondLevelScene::clearScene()
+{
+timer_enemy->stop();
+timer_move_enemy->stop();
+timer_asteroid->stop();
+col->stop();
+}
+
 void SecondLevelScene::move_enemy()
 {
 for(int i=0;i<enemies.size();i++){
@@ -80,6 +96,7 @@ for(int i=0;i<enemies.size();i++){
            s->removeItem(enemies[i]);
            delete enemies[i];
            enemies.erase(std::remove(enemies.begin(), enemies.end(), enemies[i]), enemies.end());
+
         }
 
 
