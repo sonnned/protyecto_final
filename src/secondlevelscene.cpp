@@ -14,8 +14,10 @@ SecondLevelScene::SecondLevelScene()
      timer_enemy->start(4000);
      timer_move_enemy=new QTimer();
      timer_move_enemy->start(50);
-    timer_asteroid=new QTimer();
+     timer_asteroid=new QTimer();
      timer_asteroid->start(1000);
+     col=new QTimer();
+     col->start();
      connect(timer_asteroid,SIGNAL(timeout()),this,SLOT(generate_asteroid()));
     connect(timer_enemy,SIGNAL(timeout()),this,SLOT(generate_enemy()));
     connect(timer_move_enemy,SIGNAL(timeout()),this,SLOT(move_enemy()));
@@ -34,7 +36,7 @@ void SecondLevelScene::setGraphicsScene(QGraphicsView *g)
     nave->setScale(0.4);
     nave->setPixmap(*spr_nave);
     nave->setPos(nave->getX(),nave->getY());
-    scroll=s->addRect(40,30,30,30,,brush);
+    //scroll=s->addRect(40,30,30,30,);
 
 
 
@@ -78,9 +80,8 @@ for(int i=0;i<enemies.size();i++){
            s->removeItem(enemies[i]);
            delete enemies[i];
            enemies.erase(std::remove(enemies.begin(), enemies.end(), enemies[i]), enemies.end());
-
-
         }
+
 
 }
 }
@@ -114,7 +115,12 @@ s->addItem(asteroid);
 asteroid->setScale(0.3);
 enemies.push_back(asteroid);
 }
+/*
+void SecondLevelScene::collision()
+{
 
+}
+*/
 SecondLevelScene::~SecondLevelScene()
 {
     delete background;

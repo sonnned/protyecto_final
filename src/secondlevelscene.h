@@ -44,13 +44,16 @@ private:
     enemies_nave *asteroid;
     QVector<enemies_nave*> enemies;
     QGraphicsRectItem *scroll;
+    QTimer *col;
 
 private slots:
   void move_enemy();
   void generate_enemy();
   void generate_asteroid();
+  void collision();
 
 };
+
 
 
 
