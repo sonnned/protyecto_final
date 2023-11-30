@@ -111,6 +111,16 @@ void FirstLevelScene::setDeadEnemies(int newDeadEnemies)
     deadEnemies = newDeadEnemies;
 }
 
+int FirstLevelScene::getPlayerLife()
+{
+    return p->getHealth();
+}
+
+void FirstLevelScene::setPlayerLife(int life)
+{
+    p->setHealth(life);
+}
+
 void FirstLevelScene::setBackground()
 {
     backgroundItem = new QGraphicsPixmapItem(QPixmap(QString::fromStdString(background)));

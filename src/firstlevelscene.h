@@ -36,7 +36,8 @@ public:
     int getDeadEnemies() const;
     void setUpLevel();
     void setDeadEnemies(int newDeadEnemies);
-
+    int getPlayerLife();
+    void setPlayerLife(int life);
 private:
     QGraphicsView *g;
     QGraphicsScene *s;

@@ -12,7 +12,7 @@ Game::Game(QWidget *parent)
     ui->gameGraphics->setFixedSize(800, 600);
     ui->gameGraphics->setVisible(false);
     ui->pushMenuBtn->setVisible(false);
-    ui->youWinLabel->setVisible(false);
+    ui->youWinOverLabel->setVisible(false);
 
     gManager = new GameManager(ui->gameGraphics);
     timer = new QTimer;
@@ -145,13 +145,20 @@ void Game::verifyMainScene()
         isPaused = false;
         setWinMenu();
     }
+    if (gManager->getIsDead()) {
+        clearMenuScene();
+        isPlaying = false;
+        isPaused = false;
+        setOverMenu();
+    }
 }
 
 void Game::setHome()
 {
     ui->pushMenuBtn->setVisible(false);
-    ui->youWinLabel->setVisible(false);
+    ui->youWinOverLabel->setVisible(false);
     gManager->setIsWon(false);
+    gManager->setIsDead(false);
 
     ui->pushExitBtn->setVisible(true);
     ui->pushLevel1Btn->setVisible(true);
@@ -161,8 +168,16 @@ void Game::setHome()
 
 void Game::setWinMenu()
 {
+    ui->youWinOverLabel->setText("You win!");
     ui->pushMenuBtn->setVisible(true);
-    ui->youWinLabel->setVisible(true);
+    ui->youWinOverLabel->setVisible(true);
+}
+
+void Game::setOverMenu()
+{
+    ui->youWinOverLabel->setText("Game over!");
+    ui->pushMenuBtn->setVisible(true);
+    ui->youWinOverLabel->setVisible(true);
 }
 
 void Game::clearMenuScene()

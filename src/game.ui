@@ -79,7 +79,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="youWinLabel">
+   <widget class="QLabel" name="youWinOverLabel">
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -95,7 +95,7 @@
      </font>
     </property>
     <property name="text">
-     <string>You win!</string>
+     <string/>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -114,7 +114,7 @@
      <string>Go menu</string>
     </property>
    </widget>
-   <zorder>youWinLabel</zorder>
+   <zorder>youWinOverLabel</zorder>
    <zorder>pushMenuBtn</zorder>
    <zorder>label</zorder>
    <zorder>gridLayoutWidget</zorder>

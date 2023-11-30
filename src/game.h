@@ -29,6 +29,7 @@ private:
     bool isWon = false;
     QTimer *timer;
     void setWinMenu();
+    void setOverMenu();
     void clearMenuScene();
 private slots:
     void setFirstLevel();
