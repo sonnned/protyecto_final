@@ -26,7 +26,10 @@ private:
     void changeCurrentPageView();
     bool isPaused = false;
     bool isPlaying = false;
+    bool isWon = false;
     QTimer *timer;
+    void setWinMenu();
+    void clearMenuScene();
 private slots:
     void setFirstLevel();
     void setSecondLevel();
@@ -36,5 +39,6 @@ private slots:
     void keyReleaseEvent(QKeyEvent *e);
     void mousePressEvent(QMouseEvent *e);
     void verifyMainScene();
+    void setHome();
 };
 #endif // GAME_H

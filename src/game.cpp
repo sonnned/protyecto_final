@@ -11,6 +11,8 @@ Game::Game(QWidget *parent)
     this->setWindowTitle("Rick and Morty: Final Game");
     ui->gameGraphics->setFixedSize(800, 600);
     ui->gameGraphics->setVisible(false);
+    ui->pushMenuBtn->setVisible(false);
+    ui->youWinLabel->setVisible(false);
 
     gManager = new GameManager(ui->gameGraphics);
     timer = new QTimer;
@@ -20,7 +22,7 @@ Game::Game(QWidget *parent)
     connect(ui->pushExitBtn, &QPushButton::clicked, this, &Game::setLeaveGame);
     connect(ui->pushLevel1Btn, &QPushButton::clicked, this, &Game::setFirstLevel);
     connect(ui->pushLevel2Btn, &QPushButton::clicked, this, &Game::setSecondLevel);
-
+    connect(ui->pushMenuBtn, &QPushButton::clicked, this, &Game::setHome);
 }
 
 Game::~Game()
@@ -44,6 +46,7 @@ void Game::setFirstLevel()
     currentPage = 1;
     isPlaying = true;
     //ui->gameGraphics->setVisible(true);
+    clearMenuScene();
     changeCurrentPageView();
 
 }
@@ -52,6 +55,7 @@ void Game::setSecondLevel()
 {
     currentPage = 2;
     isPlaying = true;
+    clearMenuScene();
     changeCurrentPageView();
 }
 
@@ -129,10 +133,44 @@ void Game::mousePressEvent(QMouseEvent *e)
 
 void Game::verifyMainScene()
 {
+    /*
     if (gManager->getCurrentLevelScene() == 0) {
         isPlaying = false;
         isPaused = false;
     }
+    */
+    if (gManager->getIsWon()) {
+        clearMenuScene();
+        isPlaying = false;
+        isPaused = false;
+        setWinMenu();
+    }
+}
+
+void Game::setHome()
+{
+    ui->pushMenuBtn->setVisible(false);
+    ui->youWinLabel->setVisible(false);
+    gManager->setIsWon(false);
+
+    ui->pushExitBtn->setVisible(true);
+    ui->pushLevel1Btn->setVisible(true);
+    ui->pushLevel2Btn->setVisible(true);
+    ui->label->setVisible(true);
+}
+
+void Game::setWinMenu()
+{
+    ui->pushMenuBtn->setVisible(true);
+    ui->youWinLabel->setVisible(true);
+}
+
+void Game::clearMenuScene()
+{
+    ui->pushExitBtn->setVisible(false);
+    ui->pushLevel1Btn->setVisible(false);
+    ui->pushLevel2Btn->setVisible(false);
+    ui->label->setVisible(false);
 }
 
 

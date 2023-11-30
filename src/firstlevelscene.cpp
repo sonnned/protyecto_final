@@ -106,6 +106,11 @@ void FirstLevelScene::setUpLevel()
     connect(p, &Player::changeCurrentBullets, pCurrentBullets, &PlayerScore::changeCurrentBullets);
 }
 
+void FirstLevelScene::setDeadEnemies(int newDeadEnemies)
+{
+    deadEnemies = newDeadEnemies;
+}
+
 void FirstLevelScene::setBackground()
 {
     backgroundItem = new QGraphicsPixmapItem(QPixmap(QString::fromStdString(background)));

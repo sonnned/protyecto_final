@@ -33,6 +33,9 @@ public:
     void invokeBullet(int x, int y);
     void clearCurrentScene();
     int getCurrentLevelScene() const;
+    bool getIsWon() const;
+    void setIsWon(bool newIsWon);
+
 private:
     int currentLevelScene = 0; // 0 -> NADA // 1 -> PRIMER NIVEL // 2 -> SEGUNDO NIVEL
     QGraphicsView *g;
@@ -41,6 +44,7 @@ private:
     MenuScene *mScene;
     QTimer *timer;
     void verifyEndLevelScene();
+    bool isWon = false;
 };
 
 #endif // GAMEMANAGER_H

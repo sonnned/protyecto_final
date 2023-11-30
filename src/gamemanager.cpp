@@ -100,7 +100,19 @@ void GameManager::verifyEndLevelScene()
         if (fLevel->getDeadEnemies() == 20) {
             g->setVisible(false);
             clearCurrentScene();
-            currentLevelScene = 0;
+            //currentLevelScene = 0;
+            fLevel->setDeadEnemies(0);
+            setIsWon(true);
         }
     }
+}
+
+bool GameManager::getIsWon() const
+{
+    return isWon;
+}
+
+void GameManager::setIsWon(bool newIsWon)
+{
+    isWon = newIsWon;
 }
