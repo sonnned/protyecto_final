@@ -72,7 +72,7 @@ void FirstLevelScene::generateBullet(int x, int y)
         amountOfBullets++;
         p->setCurrentBullets(p->getCurrentBullets() - 1);
     }
-    if (bulletTimer->remainingTime() == -1 || amountOfBullets == 4) {
+    if (bulletTimer->remainingTime() == -1 && amountOfBullets == 4) {
         bulletTimer->start(2000);
         connect(bulletTimer, &QTimer::timeout, this, &FirstLevelScene::shootBullet);
     }
