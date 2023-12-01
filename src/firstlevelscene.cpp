@@ -72,7 +72,7 @@ void FirstLevelScene::generateBullet(int x, int y)
         amountOfBullets++;
         p->setCurrentBullets(p->getCurrentBullets() - 1);
     }
-    if (bulletTimer->remainingTime() == -1 || amountOfBullets == 4) {
+    if (bulletTimer->remainingTime() == -1 && amountOfBullets == 4) {
         bulletTimer->start(2000);
         connect(bulletTimer, &QTimer::timeout, this, &FirstLevelScene::shootBullet);
     }
@@ -104,6 +104,21 @@ void FirstLevelScene::setUpLevel()
     connect(enemyTimer, &QTimer::timeout, this, &FirstLevelScene::generateEnemy);
     connect(p, &Player::changePlayerLife, pScoreLife, &PlayerScore::decreaseCurrentPlayerLife);
     connect(p, &Player::changeCurrentBullets, pCurrentBullets, &PlayerScore::changeCurrentBullets);
+}
+
+void FirstLevelScene::setDeadEnemies(int newDeadEnemies)
+{
+    deadEnemies = newDeadEnemies;
+}
+
+int FirstLevelScene::getPlayerLife()
+{
+    return p->getHealth();
+}
+
+void FirstLevelScene::setPlayerLife(int life)
+{
+    p->setHealth(life);
 }
 
 void FirstLevelScene::setBackground()

@@ -9,6 +9,7 @@ GameManager::GameManager(QGraphicsView *g)
     timer = new QTimer;
     timer->start(1000);
     connect(timer, &QTimer::timeout, this, &GameManager::verifyEndLevelScene);
+    connect(timer, &QTimer::timeout, this, &GameManager::verifyIsOver);
 }
 
 GameManager::~GameManager() {
@@ -99,8 +100,45 @@ void GameManager::verifyEndLevelScene()
     if (currentLevelScene == 1) {
         if (fLevel->getDeadEnemies() == 20) {
             g->setVisible(false);
-            clearCurrentScene();
             currentLevelScene = 0;
+            clearCurrentScene();
+            fLevel->setDeadEnemies(0);
+            setIsWon(true);
+            setIsDead(false);
         }
     }
+}
+
+void GameManager::verifyIsOver()
+{
+    if (currentLevelScene == 1) {
+        if (fLevel->getPlayerLife() <= 0) {
+            g->setVisible(false);
+            currentLevelScene = 0;
+            clearCurrentScene();
+            fLevel->setPlayerLife(100);
+            setIsWon(false);
+            setIsDead(true);
+        }
+    }
+}
+
+bool GameManager::getIsWon() const
+{
+    return isWon;
+}
+
+void GameManager::setIsWon(bool newIsWon)
+{
+    isWon = newIsWon;
+}
+
+bool GameManager::getIsDead() const
+{
+    return isDead;
+}
+
+void GameManager::setIsDead(bool newIsDead)
+{
+    isDead = newIsDead;
 }

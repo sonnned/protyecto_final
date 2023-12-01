@@ -34,6 +34,8 @@ public:
     int getDir();
     int getCurrentBullets() const;
     void setCurrentBullets(int newCurrentBullets);
+    void setHealth(int newHealth);
+
 private:
     int health;
     int attack;

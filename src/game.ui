@@ -79,6 +79,46 @@
      </rect>
     </property>
    </widget>
+   <widget class="QLabel" name="youWinOverLabel">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>60</y>
+      <width>630</width>
+      <height>60</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>24</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushMenuBtn">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>190</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Go menu</string>
+    </property>
+   </widget>
+   <zorder>youWinOverLabel</zorder>
+   <zorder>pushMenuBtn</zorder>
+   <zorder>label</zorder>
+   <zorder>gridLayoutWidget</zorder>
+   <zorder>gameGraphics</zorder>
   </widget>
  </widget>
  <resources/>

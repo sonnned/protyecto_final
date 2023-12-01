@@ -106,6 +106,11 @@ void Player::setCurrentBullets(int newCurrentBullets)
     emit changeCurrentBullets(currentBullets);
 }
 
+void Player::setHealth(int newHealth)
+{
+    health = newHealth;
+}
+
 void Player::cutSprite()
 {
     QPixmap tempSprite;
