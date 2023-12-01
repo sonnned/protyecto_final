@@ -19,11 +19,17 @@ public:
     bool collision_left();
 
 
+    int getHealth() const;
+    void setHealth(int newHealth);
+
 private:
     int health;
     int x;
     int y;
     unsigned int speed = 7;
+
+signals:
+
 };
 
 #endif // SPACECRAFT_H

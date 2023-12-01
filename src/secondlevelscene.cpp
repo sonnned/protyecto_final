@@ -1,8 +1,7 @@
 #include "secondlevelscene.h"
 #include <iostream>
 #include "enemies_nave.h"
-int posi_ast=-100;
-int posi_enemy=-150;
+
 SecondLevelScene::SecondLevelScene()
 {
     s = new QGraphicsScene;
@@ -10,14 +9,17 @@ SecondLevelScene::SecondLevelScene()
     brush = new QBrush(*background);
     spr_nave=new QPixmap(":/spritres/characters/nave_morty.png");
     nave=new Spacecraft(10,200,400);
+    boss=new nave_boss(5,100,100);
+    spr_boss=new QPixmap(":/spritres/enemies/boss.png");
      timer_enemy=new QTimer();
      timer_move_enemy=new QTimer();
      timer_asteroid=new QTimer();
-
+    message=new PlayerScore(QString("vidas: "), 20, 0, 600, 25);
     connect(timer_asteroid,SIGNAL(timeout()),this,SLOT(generate_asteroid()));
     connect(timer_enemy,SIGNAL(timeout()),this,SLOT(generate_enemy()));
     connect(timer_move_enemy,SIGNAL(timeout()),this,SLOT(move_enemy()));
     connect(timer_move_enemy,SIGNAL(timeout()),this,SLOT(move_background()));
+
 
 
 }
@@ -34,7 +36,10 @@ void SecondLevelScene::setGraphicsScene(QGraphicsView *g)
     nave->setScale(0.4);
     nave->setPixmap(*spr_nave);
     nave->setPos(nave->getX(),nave->getY());
-    //scroll=s->addRect(40,30,30,30,);
+    s->addItem(boss);
+    boss->setPixmap(*spr_boss);
+    boss->setPos(boss->getX(),boss->getY());
+
 
 
 
@@ -92,11 +97,17 @@ for(int i=0;i<enemies.size();i++){
         enemies[i]->setPos(enemies[i]->pos().x(),enemies[i]->QGraphicsPixmapItem::y()+enemies[i]->getSpeed());
         enemies[i]->setY(enemies[i]->getY()+enemies[i]->getSpeed());
 
+        if(enemies[i]->collidesWithItem(nave)){
+           nave->setHealth(nave->getHealth()-1);
+
+
+        }
         if(enemies[i]->getY()>600){
            s->removeItem(enemies[i]);
            delete enemies[i];
            enemies.erase(std::remove(enemies.begin(), enemies.end(), enemies[i]), enemies.end());
            i--;
+
         }
 
 
@@ -113,7 +124,7 @@ void SecondLevelScene::generate_enemy()
 
 spr_enemy=new QPixmap(":/spritres/enemies/nave_enemiga.png");
 enemy=new enemies_nave(rand()% 700,posi_enemy);
-posi_enemy+=enemy->getScroll()-6;
+posi_enemy+=enemy->getScroll()-40;
 enemy->setPixmap(*spr_enemy);
 enemy->setPos(enemy->getX(),enemy->getY());
 s->addItem(enemy);
@@ -154,5 +165,6 @@ SecondLevelScene::~SecondLevelScene()
     delete spr_enemy;
     delete enemy;
     delete timer_enemy;
+    delete boss;
 
 }

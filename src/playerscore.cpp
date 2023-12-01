@@ -40,3 +40,8 @@ void PlayerScore::changeCurrentBullets(int bullets)
         setPlainText(scoreText);
     }
 }
+
+void PlayerScore::decrease_healt_spacecraft()
+{
+
+}

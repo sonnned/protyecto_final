@@ -11,12 +11,13 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QGraphicsItem>
-#include "background.h"
 #include <QTimer>
 #include <QScrollBar>
 #include "enemies_nave.h"
 #include <QObject>
 #include <stdlib.h>
+#include "playerscore.h"
+#include "nave_boss.h"
 class SecondLevelScene:public QObject
 {
      Q_OBJECT
@@ -42,12 +43,17 @@ private:
     Spacecraft *nave;
     QPixmap *spr_enemy;
     enemies_nave *enemy;
+    nave_boss *boss;
+    QPixmap *spr_boss;
     QTimer *timer_move_enemy;
     QTimer *timer_enemy;
     QTimer *timer_asteroid;
     QPixmap *spr_asteroid;
     enemies_nave *asteroid;
     QVector<enemies_nave*> enemies;
+    int posi_ast=-100;
+    int posi_enemy=-150;
+    PlayerScore *message;
 
 private slots:
   void move_enemy();

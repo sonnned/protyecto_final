@@ -9,7 +9,6 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    background.cpp \
     bullet.cpp \
     enemies_nave.cpp \
     enemy.cpp \
@@ -18,13 +17,13 @@ SOURCES += \
     main.cpp \
     game.cpp \
     menuscene.cpp \
+    nave_boss.cpp \
     player.cpp \
     playerscore.cpp \
     secondlevelscene.cpp \
     spacecraft.cpp
 
 HEADERS += \
-    background.h \
     bullet.h \
     enemies_nave.h \
     enemy.h \
@@ -33,6 +32,7 @@ HEADERS += \
     gamemanager.h \
     macros.h \
     menuscene.h \
+    nave_boss.h \
     player.h \
     playerscore.h \
     secondlevelscene.h \

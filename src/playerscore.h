@@ -20,6 +20,7 @@ public slots:
     void increaseCurrentDeadEnemies();
     void decreaseCurrentPlayerLife();
     void changeCurrentBullets(int bullets);
+    void decrease_healt_spacecraft();
 };
 
 #endif // PLAYERSCORE_H

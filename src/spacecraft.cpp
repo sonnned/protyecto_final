@@ -63,6 +63,16 @@ bool Spacecraft::collision_left()
     }
 }
 
+int Spacecraft::getHealth() const
+{
+    return health;
+}
+
+void Spacecraft::setHealth(int newHealth)
+{
+    health = newHealth;
+}
+
 
 
 
