@@ -1,8 +1,8 @@
 #include "secondlevelscene.h"
 #include <iostream>
 #include "enemies_nave.h"
-
-
+int posi_ast=-100;
+int posi_enemy=-150;
 SecondLevelScene::SecondLevelScene()
 {
     s = new QGraphicsScene;
@@ -11,16 +11,14 @@ SecondLevelScene::SecondLevelScene()
     spr_nave=new QPixmap(":/spritres/characters/nave_morty.png");
     nave=new Spacecraft(10,200,400);
      timer_enemy=new QTimer();
-    // timer_enemy->start(4000);
      timer_move_enemy=new QTimer();
-    // timer_move_enemy->start(50);
      timer_asteroid=new QTimer();
-     //timer_asteroid->start(1000);
-     col=new QTimer();
-     //col->start();
-     connect(timer_asteroid,SIGNAL(timeout()),this,SLOT(generate_asteroid()));
+
+    connect(timer_asteroid,SIGNAL(timeout()),this,SLOT(generate_asteroid()));
     connect(timer_enemy,SIGNAL(timeout()),this,SLOT(generate_enemy()));
     connect(timer_move_enemy,SIGNAL(timeout()),this,SLOT(move_enemy()));
+    connect(timer_move_enemy,SIGNAL(timeout()),this,SLOT(move_background()));
+
 
 }
 
@@ -75,7 +73,7 @@ void SecondLevelScene::startLevel()
 timer_enemy->start(4000);
 timer_move_enemy->start(50);
 timer_asteroid->start(1000);
-col->start();
+
 }
 
 void SecondLevelScene::clearScene()
@@ -83,20 +81,22 @@ void SecondLevelScene::clearScene()
 timer_enemy->stop();
 timer_move_enemy->stop();
 timer_asteroid->stop();
-col->stop();
+
 }
+
 
 void SecondLevelScene::move_enemy()
 {
+
 for(int i=0;i<enemies.size();i++){
-    enemies[i]->setPos(enemies[i]->pos().x(),enemies[i]->pos().y()+enemies[i]->getSpeed());
+        enemies[i]->setPos(enemies[i]->pos().x(),enemies[i]->QGraphicsPixmapItem::y()+enemies[i]->getSpeed());
         enemies[i]->setY(enemies[i]->getY()+enemies[i]->getSpeed());
 
-    if(enemies[i]->getY()>700){
+        if(enemies[i]->getY()>600){
            s->removeItem(enemies[i]);
            delete enemies[i];
            enemies.erase(std::remove(enemies.begin(), enemies.end(), enemies[i]), enemies.end());
-
+           i--;
         }
 
 
@@ -112,7 +112,8 @@ void SecondLevelScene::generate_enemy()
 
 
 spr_enemy=new QPixmap(":/spritres/enemies/nave_enemiga.png");
-enemy=new enemies_nave(rand()% 700,0);
+enemy=new enemies_nave(rand()% 700,posi_enemy);
+posi_enemy+=enemy->getScroll()-6;
 enemy->setPixmap(*spr_enemy);
 enemy->setPos(enemy->getX(),enemy->getY());
 s->addItem(enemy);
@@ -125,19 +126,23 @@ void SecondLevelScene::generate_asteroid()
 {
 
 spr_asteroid=new QPixmap(":/spritres/enemies/asteroide.png");
-asteroid=new enemies_nave(rand()% 700,0);
+asteroid=new enemies_nave(rand()% 700,posi_ast);
+posi_ast+=asteroid->getScroll();
 asteroid->setPixmap(*spr_asteroid);
 asteroid->setPos(asteroid->getX(),asteroid->getY());
 s->addItem(asteroid);
 asteroid->setScale(0.3);
 enemies.push_back(asteroid);
-}
-/*
-void SecondLevelScene::collision()
-{
 
 }
-*/
+
+void SecondLevelScene::move_background()
+{
+nave->setPos(nave->getX(),nave->QGraphicsPixmapItem::y()-2);
+s->setSceneRect(0,nave->QGraphicsPixmapItem::y()-400,s->width(),s->height());
+
+}
+
 SecondLevelScene::~SecondLevelScene()
 {
     delete background;

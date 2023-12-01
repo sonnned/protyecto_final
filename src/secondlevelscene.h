@@ -30,6 +30,9 @@ public:
     void startLevel();
     void clearScene();
 
+    int getPos() const;
+    void setPos(int newPos);
+
 private:
     QGraphicsView *g;
     QGraphicsScene *s;
@@ -45,14 +48,12 @@ private:
     QPixmap *spr_asteroid;
     enemies_nave *asteroid;
     QVector<enemies_nave*> enemies;
-    QGraphicsRectItem *scroll;
-    QTimer *col;
 
 private slots:
   void move_enemy();
   void generate_enemy();
   void generate_asteroid();
- // void collision();
+  void move_background();
 
 };
 

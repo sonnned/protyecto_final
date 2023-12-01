@@ -10,6 +10,7 @@ private:
     int x;
     int y;
     int speed=5;
+    int scroll=-100;
 public:
     enemies_nave();
     enemies_nave(int x, int y);
@@ -19,6 +20,8 @@ public:
     void setY(int newY);
     int getSpeed() const;
     void setSpeed(int newSpeed);
+    int getScroll() const;
+    void setScroll(int newScroll);
 };
 
 #endif // ENEMIES_NAVE_H
