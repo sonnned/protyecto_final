@@ -9,9 +9,9 @@ SecondLevelScene::SecondLevelScene()
     brush = new QBrush(*background);
     spr_nave=new QPixmap(":/spritres/characters/nave_morty.png");
     nave=new Spacecraft(10);
-    boss=new nave_boss(5);
+    boss=new nave_boss(2);
     spr_boss=new QPixmap(":/spritres/enemies/boss.png");
-
+    timer_collision=new QTimer();
      timer_enemy=new QTimer();
      timer_move_enemy=new QTimer();
      timer_asteroid=new QTimer();
@@ -22,6 +22,7 @@ SecondLevelScene::SecondLevelScene()
     connect(timer_move_enemy,SIGNAL(timeout()),this,SLOT(move_background()));
     connect(timer_move_enemy,SIGNAL(timeout()),this,SLOT(move_boss()));
     connect(timer_asteroid,SIGNAL(timeout()),this,SLOT(generate_bullet()));
+     connect(timer_collision,SIGNAL(timeout()),this,SLOT(collision_bullet()));
 }
 
 
@@ -80,6 +81,7 @@ void SecondLevelScene::startLevel()
 timer_enemy->start(4000);
 timer_move_enemy->start(50);
 timer_asteroid->start(1000);
+timer_collision->start();
 
 }
 
@@ -88,6 +90,7 @@ void SecondLevelScene::clearScene()
 timer_enemy->stop();
 timer_move_enemy->stop();
 timer_asteroid->stop();
+timer_collision->stop();
 
 }
 
@@ -164,6 +167,9 @@ boss->setPos(boss->x()+5,boss->y()-scroll);
 if(boss->x()>800){
       boss->setPos(-200,boss->y());
 }
+if(boss->getHealth()==0){
+     boss->setPos(-200,boss->y()-200);
+}
 
 }
 
@@ -175,6 +181,33 @@ int dir = 0;
 projectile->targetDirection(dir);
 s->addItem(projectile);
 bullets.push_back(projectile);
+
+}
+
+void SecondLevelScene::collision_bullet()
+{
+for(int i=0;i<bullets.size();i++){
+
+
+      if((bullets[i]->y()<posi_bullet)){
+           s->removeItem(bullets[i]);
+           delete bullets[i];
+           bullets.erase(std::remove(bullets.begin(), bullets.end(), bullets[i]), bullets.end());
+        i--;
+     }
+      else if(bullets[i]->collidesWithItem(boss)){
+        s->removeItem(bullets[i]);
+        delete bullets[i];
+        bullets.erase(std::remove(bullets.begin(), bullets.end(), bullets[i]), bullets.end());
+        i--;
+        boss->setHealth(boss->getHealth()-1);
+      }
+
+
+      posi_bullet-=scroll;
+
+
+   }
 
 }
 

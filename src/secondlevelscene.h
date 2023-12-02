@@ -49,11 +49,13 @@ private:
     QTimer *timer_move_enemy;
     QTimer *timer_enemy;
     QTimer *timer_asteroid;
+    QTimer *timer_collision;
     QPixmap *spr_asteroid;
     enemies_nave *asteroid;
     QVector<enemies_nave*> enemies;
     int posi_ast=-100;
     int posi_enemy=-150;
+    int posi_bullet=0;
     PlayerScore *message;
     Bullet *projectile;
      QVector<Bullet*> bullets;
@@ -66,6 +68,7 @@ private slots:
   void move_background();
   void move_boss();
   void generate_bullet();
+  void collision_bullet();
 
 
 };

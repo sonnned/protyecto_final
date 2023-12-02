@@ -15,6 +15,8 @@ public:
     nave_boss();
     nave_boss(int health);
 
+    int getHealth() const;
+    void setHealth(int newHealth);
 };
 
 #endif // NAVE_BOSS_H
