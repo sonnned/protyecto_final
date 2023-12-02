@@ -18,6 +18,7 @@
 #include <stdlib.h>
 #include "playerscore.h"
 #include "nave_boss.h"
+#include "bullet.h"
 class SecondLevelScene:public QObject
 {
      Q_OBJECT
@@ -54,6 +55,8 @@ private:
     int posi_ast=-100;
     int posi_enemy=-150;
     PlayerScore *message;
+    Bullet *projectile;
+     QVector<Bullet*> bullets;
     int scroll=2;
 
 private slots:
@@ -62,6 +65,8 @@ private slots:
   void generate_asteroid();
   void move_background();
   void move_boss();
+  void generate_bullet();
+
 
 };
 

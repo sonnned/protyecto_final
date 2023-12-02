@@ -11,6 +11,7 @@ SecondLevelScene::SecondLevelScene()
     nave=new Spacecraft(10);
     boss=new nave_boss(5);
     spr_boss=new QPixmap(":/spritres/enemies/boss.png");
+
      timer_enemy=new QTimer();
      timer_move_enemy=new QTimer();
      timer_asteroid=new QTimer();
@@ -19,11 +20,8 @@ SecondLevelScene::SecondLevelScene()
     connect(timer_enemy,SIGNAL(timeout()),this,SLOT(generate_enemy()));
     connect(timer_move_enemy,SIGNAL(timeout()),this,SLOT(move_enemy()));
     connect(timer_move_enemy,SIGNAL(timeout()),this,SLOT(move_background()));
-     connect(timer_move_enemy,SIGNAL(timeout()),this,SLOT(move_boss()));
-
-
-
-
+    connect(timer_move_enemy,SIGNAL(timeout()),this,SLOT(move_boss()));
+    connect(timer_asteroid,SIGNAL(timeout()),this,SLOT(generate_bullet()));
 }
 
 
@@ -169,6 +167,28 @@ if(boss->x()>800){
 
 }
 
+void SecondLevelScene::generate_bullet()
+{
+projectile=new Bullet(1,":/spritres/enemies/car/Projectile.png", 1000,2);
+projectile->setPos(nave->x() + (CHARACTER_WEIGHT / 4), nave->y() + (CHARACTER_HEIGHT / 4));
+int dir = 0;
+projectile->targetDirection(dir);
+s->addItem(projectile);
+bullets.push_back(projectile);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 SecondLevelScene::~SecondLevelScene()
 {
     delete background;
@@ -179,7 +199,9 @@ SecondLevelScene::~SecondLevelScene()
     delete spr_nave;
     delete spr_enemy;
     delete enemy;
+    delete asteroid;
     delete timer_enemy;
     delete boss;
+    delete projectile;
 
 }

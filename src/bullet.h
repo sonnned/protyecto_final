@@ -21,7 +21,7 @@ class Bullet: public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    Bullet(int limitOfSprites, std::string bulletSprites, int timerInterval);
+    Bullet(int limitOfSprites, std::string bulletSprites, int timerInterval,int nevel);
 
     ~Bullet();
     void targetDirection(int dir);
@@ -29,6 +29,7 @@ private:
     int initialVelX;
     int initialVelY;
     int limitOfSprites;
+    int nevel;
     int timerInterval;
     int currentSpriteRows = 0;
     std::string bulletSprites;
@@ -37,11 +38,13 @@ private:
     void cutSprite();
     void paintBullet();
     int direction;
-    void moveBullet();
+    void moveBullet(int opcion);
     int bulletSpeed = 20;
     void deleteBullet();
+     void changeSprite(int opcion);
 private slots:
-    void changeSprite();
+
+    void connect_change_slot();
 };
 
 #endif // BULLET_H

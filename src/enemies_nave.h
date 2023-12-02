@@ -7,8 +7,6 @@ class enemies_nave : public QGraphicsPixmapItem
 {
 
 private:
-   // int X;
-   // int Y;
     int speed=3;
     int scroll=-100;
 public:

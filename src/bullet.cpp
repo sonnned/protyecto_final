@@ -1,14 +1,15 @@
 #include "bullet.h"
 
-Bullet::Bullet(int limitOfSprites, std::string bulletSprites, int timerInterval)
+Bullet::Bullet(int limitOfSprites, std::string bulletSprites, int timerInterval,int nevel)
 {
     this->limitOfSprites = limitOfSprites;
     this->bulletSprites = bulletSprites;
     this->timerInterval = timerInterval;
+    this->nevel=nevel;
     sprite = new QPixmap;
     this->timer = new QTimer();
     timer->start(timerInterval / 10);
-    connect(timer, SIGNAL(timeout()), this, SLOT(changeSprite()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(connect_change_slot()));
 }
 
 Bullet::~Bullet()
@@ -37,17 +38,29 @@ void Bullet::cutSprite()
     *sprite = sprite->scaled(20, 20, Qt::KeepAspectRatio);
 }
 
-void Bullet::changeSprite()
+void Bullet::changeSprite(int opcion)
 {
     currentSpriteRows++;
     if (currentSpriteRows > limitOfSprites) currentSpriteRows = 0;
     cutSprite();
     setPixmap(*sprite);
-    moveBullet();
+    moveBullet(opcion);
 }
 
-void Bullet::moveBullet()
+void Bullet::connect_change_slot()
 {
+    if(nevel==1){
+        changeSprite(1);
+    }
+    if(nevel==2){
+        changeSprite(2);
+
+    }
+}
+
+void Bullet::moveBullet(int opcion)
+{
+
     if (direction == 0) {
         setY(y() - bulletSpeed);
     } else if (direction == 1) {
@@ -57,11 +70,19 @@ void Bullet::moveBullet()
     } else if (direction == 3) {
         setX(x() + bulletSpeed);
     }
+    if(opcion==1){
     deleteBullet();
+    }
+
+
 }
+
+
+
 
 void Bullet::deleteBullet()
 {
+
     if ((x() < 0) || (x() > scene()->width()) || (y() < 0) || (y() > scene()->height())) {
         scene()->removeItem(this);
         delete this;
