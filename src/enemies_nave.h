@@ -7,17 +7,12 @@ class enemies_nave : public QGraphicsPixmapItem
 {
 
 private:
-    int x;
-    int y;
-    int speed=5;
+   // int X;
+   // int Y;
+    int speed=3;
     int scroll=-100;
 public:
     enemies_nave();
-    enemies_nave(int x, int y);
-    int getX() const;
-    void setX(int newX);
-    int getY() const;
-    void setY(int newY);
     int getSpeed() const;
     void setSpeed(int newSpeed);
     int getScroll() const;

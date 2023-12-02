@@ -54,12 +54,14 @@ private:
     int posi_ast=-100;
     int posi_enemy=-150;
     PlayerScore *message;
+    int scroll=2;
 
 private slots:
   void move_enemy();
   void generate_enemy();
   void generate_asteroid();
   void move_background();
+  void move_boss();
 
 };
 

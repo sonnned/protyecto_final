@@ -22,6 +22,7 @@ class Bullet: public QObject, public QGraphicsPixmapItem
     Q_OBJECT
 public:
     Bullet(int limitOfSprites, std::string bulletSprites, int timerInterval);
+
     ~Bullet();
     void targetDirection(int dir);
 private:

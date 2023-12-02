@@ -8,8 +8,8 @@ SecondLevelScene::SecondLevelScene()
     background= new QPixmap(":/spritres/backgrounds/fondito_largo.jpg");
     brush = new QBrush(*background);
     spr_nave=new QPixmap(":/spritres/characters/nave_morty.png");
-    nave=new Spacecraft(10,200,400);
-    boss=new nave_boss(5,100,100);
+    nave=new Spacecraft(10);
+    boss=new nave_boss(5);
     spr_boss=new QPixmap(":/spritres/enemies/boss.png");
      timer_enemy=new QTimer();
      timer_move_enemy=new QTimer();
@@ -19,6 +19,8 @@ SecondLevelScene::SecondLevelScene()
     connect(timer_enemy,SIGNAL(timeout()),this,SLOT(generate_enemy()));
     connect(timer_move_enemy,SIGNAL(timeout()),this,SLOT(move_enemy()));
     connect(timer_move_enemy,SIGNAL(timeout()),this,SLOT(move_background()));
+     connect(timer_move_enemy,SIGNAL(timeout()),this,SLOT(move_boss()));
+
 
 
 
@@ -35,10 +37,12 @@ void SecondLevelScene::setGraphicsScene(QGraphicsView *g)
     s->addItem(nave);
     nave->setScale(0.4);
     nave->setPixmap(*spr_nave);
-    nave->setPos(nave->getX(),nave->getY());
+    nave->setPos(200,450);
+
     s->addItem(boss);
+    boss->setScale(0.8);
     boss->setPixmap(*spr_boss);
-    boss->setPos(boss->getX(),boss->getY());
+    boss->setPos(-100,10);
 
 
 
@@ -50,11 +54,11 @@ void SecondLevelScene::movement(char key)
     if(key=='A'){
         if(nave->collision_left()==true){
             nave->setPos(nave->pos().x()+0,nave->pos().y());
-            nave->setX(nave->getX()+0);
+            nave->setX(nave->x()+0);
         }
         else{
            nave->setPos(nave->pos().x()-nave->getSpeed(),nave->pos().y());
-           nave->setX(nave->getX()-nave->getSpeed());
+           nave->setX(nave->x()-nave->getSpeed());
         }
 
     }
@@ -62,11 +66,11 @@ void SecondLevelScene::movement(char key)
 
         if(nave->collision_right()==true){
            nave->setPos(nave->pos().x()+0,nave->pos().y());
-           nave->setX(nave->getX()+0);
+           nave->setX(nave->x()+0);
         }
         else{
            nave->setPos(nave->pos().x()+nave->getSpeed(),nave->pos().y());
-           nave->setX(nave->getX()+nave->getSpeed());
+           nave->setX(nave->x()+nave->getSpeed());
         }
 
 }
@@ -95,14 +99,14 @@ void SecondLevelScene::move_enemy()
 
 for(int i=0;i<enemies.size();i++){
         enemies[i]->setPos(enemies[i]->pos().x(),enemies[i]->QGraphicsPixmapItem::y()+enemies[i]->getSpeed());
-        enemies[i]->setY(enemies[i]->getY()+enemies[i]->getSpeed());
+        enemies[i]->setY(enemies[i]->y()+enemies[i]->getSpeed());
 
         if(enemies[i]->collidesWithItem(nave)){
            nave->setHealth(nave->getHealth()-1);
 
 
         }
-        if(enemies[i]->getY()>600){
+        if(enemies[i]->y()>600){
            s->removeItem(enemies[i]);
            delete enemies[i];
            enemies.erase(std::remove(enemies.begin(), enemies.end(), enemies[i]), enemies.end());
@@ -123,10 +127,10 @@ void SecondLevelScene::generate_enemy()
 
 
 spr_enemy=new QPixmap(":/spritres/enemies/nave_enemiga.png");
-enemy=new enemies_nave(rand()% 700,posi_enemy);
-posi_enemy+=enemy->getScroll()-40;
+enemy=new enemies_nave();
 enemy->setPixmap(*spr_enemy);
-enemy->setPos(enemy->getX(),enemy->getY());
+enemy->setPos(rand()%700,posi_enemy);
+posi_enemy+=enemy->getScroll()-40;
 s->addItem(enemy);
 enemies.push_back(enemy);
 
@@ -137,10 +141,10 @@ void SecondLevelScene::generate_asteroid()
 {
 
 spr_asteroid=new QPixmap(":/spritres/enemies/asteroide.png");
-asteroid=new enemies_nave(rand()% 700,posi_ast);
-posi_ast+=asteroid->getScroll();
+asteroid=new enemies_nave();
 asteroid->setPixmap(*spr_asteroid);
-asteroid->setPos(asteroid->getX(),asteroid->getY());
+asteroid->setPos(rand()%700,posi_ast);
+posi_ast+=asteroid->getScroll();
 s->addItem(asteroid);
 asteroid->setScale(0.3);
 enemies.push_back(asteroid);
@@ -149,8 +153,19 @@ enemies.push_back(asteroid);
 
 void SecondLevelScene::move_background()
 {
-nave->setPos(nave->getX(),nave->QGraphicsPixmapItem::y()-2);
-s->setSceneRect(0,nave->QGraphicsPixmapItem::y()-400,s->width(),s->height());
+nave->setPos(nave->x(),nave->y()-scroll);
+s->setSceneRect(0,nave->y()-450,s->width(),s->height());
+
+}
+
+void SecondLevelScene::move_boss()
+{
+
+boss->setPos(boss->x()+5,boss->y()-scroll);
+
+if(boss->x()>800){
+      boss->setPos(-200,boss->y());
+}
 
 }
 
