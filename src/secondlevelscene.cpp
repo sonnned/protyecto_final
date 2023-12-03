@@ -5,7 +5,7 @@
 SecondLevelScene::SecondLevelScene()
 {
     s = new QGraphicsScene;
-    background= new QPixmap(":/spritres/backgrounds/fondito_largo.jpg");
+    background= new QPixmap(":/spritres/backgrounds/fondito_prueba.jpg");
     brush = new QBrush(*background);
     spr_nave=new QPixmap(":/spritres/characters/nave_morty.png");
     nave=new Spacecraft(10);
@@ -78,7 +78,7 @@ void SecondLevelScene::movement(char key)
 
 void SecondLevelScene::startLevel()
 {
-timer_enemy->start(4000);
+timer_enemy->start(2000);
 timer_move_enemy->start(50);
 timer_asteroid->start(1000);
 timer_collision->start();
@@ -104,6 +104,10 @@ for(int i=0;i<enemies.size();i++){
 
         if(enemies[i]->collidesWithItem(nave)){
            nave->setHealth(nave->getHealth()-1);
+           s->removeItem(enemies[i]);
+           delete enemies[i];
+           enemies.erase(std::remove(enemies.begin(), enemies.end(), enemies[i]), enemies.end());
+           i--;
 
 
         }
@@ -202,7 +206,6 @@ for(int i=0;i<bullets.size();i++){
         i--;
         boss->setHealth(boss->getHealth()-1);
       }
-
 
       posi_bullet-=scroll;
 
