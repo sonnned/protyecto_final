@@ -64,8 +64,7 @@ void FirstLevelScene::clearScene()
 void FirstLevelScene::generateBullet(int x, int y)
 {
     if (amountOfBullets < 4) {
-        Bullet *newBullet = new Bullet(1, playerSprites[3], 1000,1);
-        newBullet->setPos(p->getXPos() + (CHARACTER_WEIGHT / 4), p->getYPos() + (CHARACTER_HEIGHT / 4));
+        Bullet *newBullet = new Bullet(1, playerSprites[3], 1000, 1, p->getXPos() + (CHARACTER_WEIGHT / 4), p->getYPos() + (CHARACTER_HEIGHT / 4));
         int dir = p->getDir(); // 0 -> UP/1 -> DOWN/2 -> LEFT/3 -> RIGHT
         newBullet->targetDirection(dir);
         s->addItem(newBullet);
