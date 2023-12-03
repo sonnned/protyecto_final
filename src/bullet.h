@@ -21,13 +21,13 @@ class Bullet: public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    Bullet(int limitOfSprites, std::string bulletSprites, int timerInterval,int nevel);
-    Bullet(int limitOfSprites, std::string bulletSprites, int timerInterval,int nevel, int xPlayerPos, int yPlayerPos);
+    Bullet(int limitOfSprites, std::string bulletSprites, int timerInterval,int level);
+    Bullet(int limitOfSprites, std::string bulletSprites, int timerInterval,int level, int xPlayerPos, int yPlayerPos);
     ~Bullet();
     void targetDirection(int dir);
 private:
     int limitOfSprites;
-    int nevel;
+    int level;
     int timerInterval;
     int currentSpriteRows = 0;
     std::string bulletSprites;

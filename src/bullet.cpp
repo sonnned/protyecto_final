@@ -1,11 +1,11 @@
 #include "bullet.h"
 
-Bullet::Bullet(int limitOfSprites, std::string bulletSprites, int timerInterval,int nevel)
+Bullet::Bullet(int limitOfSprites, std::string bulletSprites, int timerInterval,int level)
 {
     this->limitOfSprites = limitOfSprites;
     this->bulletSprites = bulletSprites;
     this->timerInterval = timerInterval;
-    this->nevel=nevel;
+    this->level=level;
     sprite = new QPixmap;
     this->timer = new QTimer();
     timer->start(timerInterval / 10);
@@ -13,12 +13,12 @@ Bullet::Bullet(int limitOfSprites, std::string bulletSprites, int timerInterval,
 }
 
 
-Bullet::Bullet(int limitOfSprites, std::string bulletSprites, int timerInterval, int nevel, int xPlayerPos, int yPlayerPos)
+Bullet::Bullet(int limitOfSprites, std::string bulletSprites, int timerInterval, int level, int xPlayerPos, int yPlayerPos)
 {
     this->limitOfSprites = limitOfSprites;
     this->bulletSprites = bulletSprites;
     this->timerInterval = timerInterval;
-    this->nevel=nevel;
+    this->level=level;
     sprite = new QPixmap;
     this->timer = new QTimer();
     gravity = 9.8;
@@ -71,10 +71,10 @@ void Bullet::changeSprite(int opcion)
 
 void Bullet::connect_change_slot()
 {
-    if(nevel==1){
+    if(level==1){
         changeSprite(1);
     }
-    if(nevel==2){
+    if(level==2){
         changeSprite(2);
 
     }
@@ -123,8 +123,15 @@ void Bullet::deleteBullet()
 }
 
 void Bullet::paintBullet() {
-    QPainter painter(sprite);
-    painter.setCompositionMode(QPainter::CompositionMode_SourceIn);
-    painter.fillRect(sprite->rect(), Qt::green);
-    painter.end();
+    if (level == 1) {
+        QPainter painter(sprite);
+        painter.setCompositionMode(QPainter::CompositionMode_SourceIn);
+        painter.fillRect(sprite->rect(), QColor(81, 81, 81));
+        painter.end();
+    } else if (level == 2) {
+        QPainter painter(sprite);
+        painter.setCompositionMode(QPainter::CompositionMode_SourceIn);
+        painter.fillRect(sprite->rect(), Qt::green);
+        painter.end();
+    }
 }
