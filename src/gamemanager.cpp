@@ -7,7 +7,7 @@ GameManager::GameManager(QGraphicsView *g)
     mScene = new MenuScene;
     this->g = g;
     timer = new QTimer;
-    timer->start(1000);
+    timer->start(500);
     connect(timer, &QTimer::timeout, this, &GameManager::verifyEndLevelScene);
     connect(timer, &QTimer::timeout, this, &GameManager::verifyIsOver);
 }
