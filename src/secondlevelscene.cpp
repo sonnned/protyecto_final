@@ -9,21 +9,26 @@ SecondLevelScene::SecondLevelScene()
     brush = new QBrush(*background);
     spr_nave=new QPixmap(":/spritres/characters/nave_morty.png");
     nave=new Spacecraft(10);
-    boss=new nave_boss(2);
+    boss=new nave_boss(10);
     spr_boss=new QPixmap(":/spritres/enemies/boss.png");
     timer_collision=new QTimer();
      timer_enemy=new QTimer();
      timer_move_enemy=new QTimer();
      timer_asteroid=new QTimer();
-    message=new PlayerScore(QString("vidas: "), 20, 0, 600, 25);
+    message=new PlayerScore(QString("vidas: "),0, 5, 600, 25);
     connect(timer_asteroid,SIGNAL(timeout()),this,SLOT(generate_asteroid()));
     connect(timer_enemy,SIGNAL(timeout()),this,SLOT(generate_enemy()));
     connect(timer_move_enemy,SIGNAL(timeout()),this,SLOT(move_enemy()));
     connect(timer_move_enemy,SIGNAL(timeout()),this,SLOT(move_background()));
     connect(timer_move_enemy,SIGNAL(timeout()),this,SLOT(move_boss()));
-    connect(timer_asteroid,SIGNAL(timeout()),this,SLOT(generate_bullet()));
-     connect(timer_collision,SIGNAL(timeout()),this,SLOT(collision_bullet()));
+    connect(timer_enemy,SIGNAL(timeout()),this,SLOT(generate_bullet()));
+    connect(timer_collision,SIGNAL(timeout()),this,SLOT(collision_bullet()));
+    connect(timer_collision,SIGNAL(timeout()),this,SLOT(collision_bullet_with_enemies()));
+   // connect(nave,&Spacecraft::change_healt,message,&::PlayerScore::decrease_healt_spacecraft);
+
+
 }
+
 
 
 void SecondLevelScene::setGraphicsScene(QGraphicsView *g)
@@ -104,6 +109,7 @@ for(int i=0;i<enemies.size();i++){
 
         if(enemies[i]->collidesWithItem(nave)){
            nave->setHealth(nave->getHealth()-1);
+           emit nave->change_healt();
            s->removeItem(enemies[i]);
            delete enemies[i];
            enemies.erase(std::remove(enemies.begin(), enemies.end(), enemies[i]), enemies.end());
@@ -166,14 +172,12 @@ s->setSceneRect(0,nave->y()-450,s->width(),s->height());
 void SecondLevelScene::move_boss()
 {
 
-boss->setPos(boss->x()+5,boss->y()-scroll);
+boss->setPos(boss->x()+5,boss->getAmplitude()*sin(2*M_PI*boss->getFrequency()*1));
 
 if(boss->x()>800){
       boss->setPos(-200,boss->y());
 }
-if(boss->getHealth()==0){
-     boss->setPos(-200,boss->y()-200);
-}
+
 
 }
 
@@ -210,20 +214,9 @@ for(int i=0;i<bullets.size();i++){
       posi_bullet-=scroll;
 
 
-   }
+      }
 
 }
-
-
-
-
-
-
-
-
-
-
-
 
 SecondLevelScene::~SecondLevelScene()
 {

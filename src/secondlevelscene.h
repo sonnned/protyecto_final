@@ -19,6 +19,7 @@
 #include "playerscore.h"
 #include "nave_boss.h"
 #include "bullet.h"
+#include <cmath>>
 class SecondLevelScene:public QObject
 {
      Q_OBJECT
@@ -68,8 +69,7 @@ private slots:
   void move_background();
   void move_boss();
   void generate_bullet();
-  void collision_bullet();
-
+  void collision_bullet(); 
 
 };
 
