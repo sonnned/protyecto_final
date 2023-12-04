@@ -44,5 +44,9 @@ void PlayerScore::changeCurrentBullets(int bullets)
 
 void PlayerScore::decrease_healt_spacecraft()
 {
-
+    if (initialBeg > 0) {
+        beg -= 1;
+        QString scoreText = text + QString::number(beg) + QString("/") + QString::number(limit);
+        setPlainText(scoreText);
+    }
 }

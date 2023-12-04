@@ -8,7 +8,8 @@ private:
    // int X;
    // int Y;
     int speed=5;
-    double g=9.8;
+    int amplitude=2;
+    int frequency=3;
 
 
 public:
@@ -17,6 +18,10 @@ public:
 
     int getHealth() const;
     void setHealth(int newHealth);
+    int getAmplitude() const;
+    void setAmplitude(int newAmplitude);
+    int getFrequency() const;
+    void setFrequency(int newFrequency);
 };
 
 #endif // NAVE_BOSS_H

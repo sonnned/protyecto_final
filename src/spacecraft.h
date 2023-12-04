@@ -4,8 +4,10 @@
 #include <QPixmap>
 #include <QGraphicsPixmapItem>
 #include <QKeyEvent>
-class Spacecraft :public QGraphicsPixmapItem
+class Spacecraft :public QObject, public QGraphicsPixmapItem
+
 {
+     Q_OBJECT
 public:
     Spacecraft();
     Spacecraft(int health);
@@ -22,8 +24,9 @@ private:
     //int Y;
     unsigned int speed =5;
 
-signals:
 
+signals:
+    void change_healt();
 };
 
 #endif // SPACECRAFT_H

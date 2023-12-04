@@ -5,25 +5,33 @@
 SecondLevelScene::SecondLevelScene()
 {
     s = new QGraphicsScene;
-    background= new QPixmap(":/spritres/backgrounds/fondito_prueba.jpg");
+    background= new QPixmap();
     brush = new QBrush(*background);
     spr_nave=new QPixmap(":/spritres/characters/nave_morty.png");
     nave=new Spacecraft(10);
-    boss=new nave_boss(2);
+    boss=new nave_boss(10);
     spr_boss=new QPixmap(":/spritres/enemies/boss.png");
     timer_collision=new QTimer();
      timer_enemy=new QTimer();
      timer_move_enemy=new QTimer();
      timer_asteroid=new QTimer();
+<<<<<<< HEAD
     message=new PlayerScore(QString("vidas: "), 20, 0, 600, 25, 2);
+=======
+    message=new PlayerScore(QString("vidas: "),0, 5, 600, 25);
+>>>>>>> 2de1af5fe09c12a4f115379beb41ee455693bdcc
     connect(timer_asteroid,SIGNAL(timeout()),this,SLOT(generate_asteroid()));
     connect(timer_enemy,SIGNAL(timeout()),this,SLOT(generate_enemy()));
     connect(timer_move_enemy,SIGNAL(timeout()),this,SLOT(move_enemy()));
     connect(timer_move_enemy,SIGNAL(timeout()),this,SLOT(move_background()));
     connect(timer_move_enemy,SIGNAL(timeout()),this,SLOT(move_boss()));
-    connect(timer_asteroid,SIGNAL(timeout()),this,SLOT(generate_bullet()));
-     connect(timer_collision,SIGNAL(timeout()),this,SLOT(collision_bullet()));
+    connect(timer_enemy,SIGNAL(timeout()),this,SLOT(generate_bullet()));
+    connect(timer_collision,SIGNAL(timeout()),this,SLOT(collision_bullet()));
+    connect(nave,&Spacecraft::change_healt,message,&::PlayerScore::decrease_healt_spacecraft);
+
+//":/spritres/backgrounds/fondito_prueba.jpg"
 }
+
 
 
 void SecondLevelScene::setGraphicsScene(QGraphicsView *g)
@@ -37,11 +45,11 @@ void SecondLevelScene::setGraphicsScene(QGraphicsView *g)
     nave->setScale(0.4);
     nave->setPixmap(*spr_nave);
     nave->setPos(200,450);
-
     s->addItem(boss);
     boss->setScale(0.8);
     boss->setPixmap(*spr_boss);
     boss->setPos(-100,10);
+    s->addItem(message);
 
 
 
@@ -97,39 +105,32 @@ timer_collision->stop();
 
 void SecondLevelScene::move_enemy()
 {
+for (auto it = enemies.begin(); it != enemies.end();) {
+        (*it)->setPos((*it)->pos().x(), (*it)->QGraphicsPixmapItem::y() + (*it)->getSpeed());
+        (*it)->setY((*it)->y() + (*it)->getSpeed());
 
-for(int i=0;i<enemies.size();i++){
-        enemies[i]->setPos(enemies[i]->pos().x(),enemies[i]->QGraphicsPixmapItem::y()+enemies[i]->getSpeed());
-        enemies[i]->setY(enemies[i]->y()+enemies[i]->getSpeed());
-
-        if(enemies[i]->collidesWithItem(nave)){
-           nave->setHealth(nave->getHealth()-1);
-           s->removeItem(enemies[i]);
-           delete enemies[i];
-           enemies.erase(std::remove(enemies.begin(), enemies.end(), enemies[i]), enemies.end());
-           i--;
-
-
+        if ((*it)->collidesWithItem(nave)) {
+           nave->setHealth(nave->getHealth() - 1);
+           s->removeItem(*it);
+           delete *it;
+           it = enemies.erase(it);
+           emit nave->change_healt();
+        } else if ((*it)->y() > 600) {
+           s->removeItem(*it);
+           delete *it;
+           it = enemies.erase(it);
         }
-        if(enemies[i]->y()>600){
-           s->removeItem(enemies[i]);
-           delete enemies[i];
-           enemies.erase(std::remove(enemies.begin(), enemies.end(), enemies[i]), enemies.end());
-           i--;
-
-        }
-
-
-}
+        else {
+           ++it;
+            }
 }
 
-
+}
 
 
 void SecondLevelScene::generate_enemy()
 {
 //798
-
 
 spr_enemy=new QPixmap(":/spritres/enemies/nave_enemiga.png");
 enemy=new enemies_nave();
@@ -166,14 +167,13 @@ s->setSceneRect(0,nave->y()-450,s->width(),s->height());
 void SecondLevelScene::move_boss()
 {
 
-boss->setPos(boss->x()+5,boss->y()-scroll);
+boss->setPos(boss->x()+5,boss->y()-2);
 
 if(boss->x()>800){
-      boss->setPos(-200,boss->y());
+        boss->setPos(-200,10);
+
 }
-if(boss->getHealth()==0){
-     boss->setPos(-200,boss->y()-200);
-}
+
 
 }
 
@@ -190,40 +190,26 @@ bullets.push_back(projectile);
 
 void SecondLevelScene::collision_bullet()
 {
-for(int i=0;i<bullets.size();i++){
+for (auto it = bullets.begin(); it != bullets.end();) {
+        if ((*it)->y() < posi_bullet) {
+           s->removeItem(*it);
+           delete *it;
+           it = bullets.erase(it);
+        } else if ((*it)->collidesWithItem(boss)) {
+           s->removeItem(*it);
+           delete *it;
+           it = bullets.erase(it);
+           boss->setHealth(boss->getHealth() - 1);
 
+        }
+        else {
+           ++it;
+        }
 
-      if((bullets[i]->y()<posi_bullet)){
-           s->removeItem(bullets[i]);
-           delete bullets[i];
-           bullets.erase(std::remove(bullets.begin(), bullets.end(), bullets[i]), bullets.end());
-        i--;
-     }
-      else if(bullets[i]->collidesWithItem(boss)){
-        s->removeItem(bullets[i]);
-        delete bullets[i];
-        bullets.erase(std::remove(bullets.begin(), bullets.end(), bullets[i]), bullets.end());
-        i--;
-        boss->setHealth(boss->getHealth()-1);
-      }
-
-      posi_bullet-=scroll;
-
-
-   }
-
+        posi_bullet -= scroll;
 }
 
-
-
-
-
-
-
-
-
-
-
+}
 
 SecondLevelScene::~SecondLevelScene()
 {
