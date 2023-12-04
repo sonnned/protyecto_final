@@ -4,7 +4,7 @@
 #include <QPixmap>
 #include <QGraphicsPixmapItem>
 #include <QKeyEvent>
-class Spacecraft :public QGraphicsPixmapItem, public QObject
+class Spacecraft :public QObject, public QGraphicsPixmapItem
 
 {
      Q_OBJECT
