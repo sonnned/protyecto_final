@@ -9,14 +9,14 @@ SecondLevelScene::SecondLevelScene()
     brush = new QBrush(*background);
     spr_nave=new QPixmap(":/spritres/characters/nave_morty.png");
     nave=new Spacecraft(5);
-    boss=new nave_boss(25);
+    boss=new nave_boss(1);
     spr_boss=new QPixmap(":/spritres/enemies/boss.png");
     timer_collision=new QTimer();
      timer_enemy=new QTimer();
      timer_move_enemy=new QTimer();
      timer_asteroid=new QTimer();
     message_nave=new PlayerScore(QString("Rick: "), 5, 5, 650, 50, 2);
-     message_boss=new PlayerScore(QString("Boss: "), 25, 25, 650, 30, 2);
+     message_boss=new PlayerScore(QString("Boss: "), 1, 1, 650, 30, 2);
 
     connect(timer_asteroid,SIGNAL(timeout()),this,SLOT(generate_asteroid()));
     connect(timer_enemy,SIGNAL(timeout()),this,SLOT(generate_enemy()));
@@ -213,6 +213,27 @@ for (auto it = bullets.begin(); it != bullets.end();) {
 }
 
 }
+
+int SecondLevelScene::get_nave_life()
+{
+return nave->getHealth();
+}
+
+int SecondLevelScene::get_boss_life()
+{
+return boss->getHealth();
+}
+
+void SecondLevelScene::set_nave_life(int health)
+{
+nave->setHealth(health);
+}
+
+void SecondLevelScene::set_boss_life(int health)
+{
+boss->setHealth(health);
+}
+
 
 SecondLevelScene::~SecondLevelScene()
 {

@@ -32,9 +32,12 @@ public:
     void movement(char key);
     void startLevel();
     void clearScene();
-
     int getPos() const;
     void setPos(int newPos);
+    int get_nave_life();
+    int get_boss_life();
+    void set_nave_life(int health);
+    void set_boss_life(int health);
 
 private:
     QGraphicsView *g;

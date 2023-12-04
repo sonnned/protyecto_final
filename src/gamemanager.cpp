@@ -107,6 +107,17 @@ void GameManager::verifyEndLevelScene()
             setIsDead(false);
         }
     }
+    else if(currentLevelScene==2){
+        if(sLevel->get_boss_life()<=0){
+            g->setVisible(false);
+            currentLevelScene = 0;
+            clearCurrentScene();
+            sLevel->set_boss_life(1);
+            sLevel->set_nave_life(5);
+            setIsWon(true);
+            setIsDead(false);
+        }
+    }
 }
 
 void GameManager::verifyIsOver()
@@ -117,6 +128,18 @@ void GameManager::verifyIsOver()
             currentLevelScene = 0;
             clearCurrentScene();
             fLevel->setPlayerLife(100);
+            setIsWon(false);
+            setIsDead(true);
+        }
+
+    }
+    else if(currentLevelScene==2){
+        if(sLevel->get_nave_life()<=0){
+            g->setVisible(false);
+            currentLevelScene = 0;
+            clearCurrentScene();
+            sLevel->set_boss_life(1);
+            sLevel->set_nave_life(5);
             setIsWon(false);
             setIsDead(true);
         }

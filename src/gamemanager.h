@@ -17,6 +17,8 @@
 #include <QTimer>
 #include <QBrush>
 #include "ui_game.h"
+#include "secondlevelscene.h"
+#include "firstlevelscene.h"
 
 class Game;
 

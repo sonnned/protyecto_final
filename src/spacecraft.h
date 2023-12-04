@@ -20,8 +20,6 @@ public:
 
 private:
     int health;
-    //int X;
-    //int Y;
     unsigned int speed =5;
 
 

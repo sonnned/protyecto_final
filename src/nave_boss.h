@@ -6,7 +6,6 @@ class nave_boss: public QObject,public QGraphicsPixmapItem
      Q_OBJECT
 private:
     int health;
-
     int speed=5;
     int posI=10;
 
@@ -14,12 +13,8 @@ private:
 public:
     nave_boss();
     nave_boss(int health);
-
     int getHealth() const;
     void setHealth(int newHealth);
-
-
-
     int getPosI() const;
     void setPosI(int newPosI);
 
@@ -28,3 +23,20 @@ signals:
 };
 
 #endif // NAVE_BOSS_H
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
