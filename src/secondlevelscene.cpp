@@ -5,17 +5,19 @@
 SecondLevelScene::SecondLevelScene()
 {
     s = new QGraphicsScene;
-    background= new QPixmap();
+    background= new QPixmap(":/spritres/backgrounds/fondito_prueba.jpg");
     brush = new QBrush(*background);
     spr_nave=new QPixmap(":/spritres/characters/nave_morty.png");
-    nave=new Spacecraft(10);
-    boss=new nave_boss(10);
+    nave=new Spacecraft(5);
+    boss=new nave_boss(25);
     spr_boss=new QPixmap(":/spritres/enemies/boss.png");
     timer_collision=new QTimer();
      timer_enemy=new QTimer();
      timer_move_enemy=new QTimer();
      timer_asteroid=new QTimer();
-    message=new PlayerScore(QString("vidas: "), 20, 0, 600, 25, 2);
+    message_nave=new PlayerScore(QString("Rick: "), 5, 5, 650, 50, 2);
+     message_boss=new PlayerScore(QString("Boss: "), 25, 25, 650, 30, 2);
+
     connect(timer_asteroid,SIGNAL(timeout()),this,SLOT(generate_asteroid()));
     connect(timer_enemy,SIGNAL(timeout()),this,SLOT(generate_enemy()));
     connect(timer_move_enemy,SIGNAL(timeout()),this,SLOT(move_enemy()));
@@ -23,9 +25,10 @@ SecondLevelScene::SecondLevelScene()
     connect(timer_move_enemy,SIGNAL(timeout()),this,SLOT(move_boss()));
     connect(timer_enemy,SIGNAL(timeout()),this,SLOT(generate_bullet()));
     connect(timer_collision,SIGNAL(timeout()),this,SLOT(collision_bullet()));
-    connect(nave,&Spacecraft::change_healt,message,&::PlayerScore::decrease_healt_spacecraft);
+    connect(nave,&Spacecraft::change_health,message_nave,&::PlayerScore::decrease_health_spacecraft);
+    connect(boss,&nave_boss::change_health_boss,message_boss,&::PlayerScore::decrease_health_spacecraft);
 
-//":/spritres/backgrounds/fondito_prueba.jpg"
+
 }
 
 
@@ -45,7 +48,8 @@ void SecondLevelScene::setGraphicsScene(QGraphicsView *g)
     boss->setScale(0.8);
     boss->setPixmap(*spr_boss);
     boss->setPos(-100,10);
-    s->addItem(message);
+    s->addItem(message_nave);
+    s->addItem(message_boss);
 
 
 
@@ -110,7 +114,7 @@ for (auto it = enemies.begin(); it != enemies.end();) {
            s->removeItem(*it);
            delete *it;
            it = enemies.erase(it);
-           emit nave->change_healt();
+           emit nave->change_health();
         } else if ((*it)->y() > 600) {
            s->removeItem(*it);
            delete *it;
@@ -157,6 +161,8 @@ void SecondLevelScene::move_background()
 {
 nave->setPos(nave->x(),nave->y()-scroll);
 s->setSceneRect(0,nave->y()-450,s->width(),s->height());
+message_nave->setPos(message_nave->x(),message_nave->y()-scroll);
+message_boss->setPos(message_boss->x(),message_boss->y()-scroll);
 
 }
 
@@ -164,9 +170,9 @@ void SecondLevelScene::move_boss()
 {
 
 boss->setPos(boss->x()+5,boss->y()-2);
-
+boss->setPosI(boss->getPosI()-scroll);
 if(boss->x()>800){
-        boss->setPos(-200,10);
+    boss->setPos(-200,boss->getPosI());
 
 }
 
@@ -196,6 +202,7 @@ for (auto it = bullets.begin(); it != bullets.end();) {
            delete *it;
            it = bullets.erase(it);
            boss->setHealth(boss->getHealth() - 1);
+           emit boss->change_health_boss();
 
         }
         else {
@@ -221,5 +228,7 @@ SecondLevelScene::~SecondLevelScene()
     delete timer_enemy;
     delete boss;
     delete projectile;
+    delete message_nave;
+    delete message_boss;
 
 }

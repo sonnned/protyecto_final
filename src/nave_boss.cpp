@@ -11,24 +11,15 @@ void nave_boss::setHealth(int newHealth)
     health = newHealth;
 }
 
-int nave_boss::getAmplitude() const
+
+int nave_boss::getPosI() const
 {
-    return amplitude;
+    return posI;
 }
 
-void nave_boss::setAmplitude(int newAmplitude)
+void nave_boss::setPosI(int newPosI)
 {
-    amplitude = newAmplitude;
-}
-
-int nave_boss::getFrequency() const
-{
-    return frequency;
-}
-
-void nave_boss::setFrequency(int newFrequency)
-{
-    frequency = newFrequency;
+    posI = newPosI;
 }
 
 nave_boss::nave_boss()

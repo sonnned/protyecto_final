@@ -42,7 +42,7 @@ void PlayerScore::changeCurrentBullets(int bullets)
     }
 }
 
-void PlayerScore::decrease_healt_spacecraft()
+void PlayerScore::decrease_health_spacecraft()
 {
     if (initialBeg > 0) {
         beg -= 1;

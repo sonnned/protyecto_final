@@ -1,15 +1,14 @@
 #ifndef NAVE_BOSS_H
 #define NAVE_BOSS_H
 #include "qgraphicsitem.h"
-class nave_boss: public QGraphicsPixmapItem
+class nave_boss: public QObject,public QGraphicsPixmapItem
 {
+     Q_OBJECT
 private:
     int health;
-   // int X;
-   // int Y;
+
     int speed=5;
-    int amplitude=2;
-    int frequency=3;
+    int posI=10;
 
 
 public:
@@ -18,10 +17,14 @@ public:
 
     int getHealth() const;
     void setHealth(int newHealth);
-    int getAmplitude() const;
-    void setAmplitude(int newAmplitude);
-    int getFrequency() const;
-    void setFrequency(int newFrequency);
+
+
+
+    int getPosI() const;
+    void setPosI(int newPosI);
+
+signals:
+    void change_health_boss();
 };
 
 #endif // NAVE_BOSS_H

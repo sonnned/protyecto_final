@@ -26,7 +26,7 @@ private:
 
 
 signals:
-    void change_healt();
+    void change_health();
 };
 
 #endif // SPACECRAFT_H

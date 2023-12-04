@@ -57,7 +57,8 @@ private:
     int posi_ast=-100;
     int posi_enemy=-150;
     int posi_bullet=0;
-    PlayerScore *message;
+    PlayerScore *message_nave;
+    PlayerScore *message_boss;
     Bullet *projectile;
      QVector<Bullet*> bullets;
     int scroll=2;
