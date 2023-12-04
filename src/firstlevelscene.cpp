@@ -94,9 +94,9 @@ void FirstLevelScene::setUpLevel()
     s = new QGraphicsScene;
     p = new Player(100, 10, 10, 10, 3, playerSprites[0], 1000);
     p->setPos(400 - 125 / 2, 300 - 162 / 2);
-    pScoreLife = new PlayerScore(QString("Life: "), 100, 100, 600, 5);
-    pScoreEnemies = new PlayerScore(QString("Enemies: "), 20, 0, 600, 25);
-    pCurrentBullets = new PlayerScore(QString("Bullets: "), 4, 4, 600, 45);
+    pScoreLife = new PlayerScore(QString("Life: "), 100, 100, 600, 5, 1);
+    pScoreEnemies = new PlayerScore(QString("Enemies: "), 20, 0, 600, 25, 1);
+    pCurrentBullets = new PlayerScore(QString("Bullets: "), 4, 4, 600, 45, 1);
     enemyTimer = new QTimer;
     this->bulletTimer = new QTimer;
     setBackground();

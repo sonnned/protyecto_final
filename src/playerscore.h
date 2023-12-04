@@ -10,7 +10,7 @@
 class PlayerScore: public QGraphicsTextItem
 {
 public:
-    PlayerScore(QString text, int limit, int beg, int x, int y);
+    PlayerScore(QString text, int limit, int beg, int x, int y, int level);
 private:
     int limit;
     QString text;

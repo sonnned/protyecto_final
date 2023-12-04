@@ -1,6 +1,6 @@
 #include "playerscore.h"
 
-PlayerScore::PlayerScore(QString text, int limit, int beg, int x, int y)
+PlayerScore::PlayerScore(QString text, int limit, int beg, int x, int y, int level)
 {
     this->beg = beg;
     initialBeg = beg;
@@ -9,7 +9,8 @@ PlayerScore::PlayerScore(QString text, int limit, int beg, int x, int y)
     QFontDatabase::addApplicationFont(":/fonts/m5x7.ttf");
     QString scoreText = text + QString::number(beg) + QString("/") + QString::number(limit);
     setPlainText(scoreText);
-    setDefaultTextColor(Qt::black);
+    if (level == 1) setDefaultTextColor(Qt::black);
+    else setDefaultTextColor(Qt::white);
     setFont(QFont("m5x7", 20));
     setPos(x, y);
 }

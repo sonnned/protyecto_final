@@ -15,7 +15,7 @@ SecondLevelScene::SecondLevelScene()
      timer_enemy=new QTimer();
      timer_move_enemy=new QTimer();
      timer_asteroid=new QTimer();
-    message=new PlayerScore(QString("vidas: "), 20, 0, 600, 25);
+    message=new PlayerScore(QString("vidas: "), 20, 0, 600, 25, 2);
     connect(timer_asteroid,SIGNAL(timeout()),this,SLOT(generate_asteroid()));
     connect(timer_enemy,SIGNAL(timeout()),this,SLOT(generate_enemy()));
     connect(timer_move_enemy,SIGNAL(timeout()),this,SLOT(move_enemy()));
