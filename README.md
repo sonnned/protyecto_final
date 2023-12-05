@@ -1,5 +1,5 @@
 # proyecto_final
-<a href="https://github.com/sonnned/proyecto_final/blob/main/Proyecto%20final%20info%202.pdf" target="_blank">
+<a href="https://github.com/sonnned/proyecto_final/blob/main/informe.pdf" target="_blank">
   Documento <strong>Proyecto final</strong>
 </a>
 <hr/>
