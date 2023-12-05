@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>spritres/enemies/Dragonfly.png</file>
+        <file>spritres/enemies/nave_enemiga.png</file>
+        <file>spritres/enemies/Twig.png</file>
+        <file>spritres/enemies/asteroide.png</file>
+        <file>spritres/enemies/boss.png</file>
+    </qresource>
+</RCC>

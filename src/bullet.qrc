@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>spritres/enemies/car/Projectile.png</file>
+    </qresource>
+</RCC>
