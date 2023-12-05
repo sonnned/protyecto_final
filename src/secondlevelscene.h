@@ -77,7 +77,4 @@ private slots:
 
 };
 
-
-
-
 #endif // SECONDLEVELSCENE_H

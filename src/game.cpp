@@ -13,7 +13,6 @@ Game::Game(QWidget *parent)
     ui->gameGraphics->setVisible(false);
     ui->pushMenuBtn->setVisible(false);
     ui->youWinOverLabel->setVisible(false);
-
     gManager = new GameManager(ui->gameGraphics);
     timer = new QTimer;
     timer->start(1000);
@@ -23,6 +22,12 @@ Game::Game(QWidget *parent)
     connect(ui->pushLevel1Btn, &QPushButton::clicked, this, &Game::setFirstLevel);
     connect(ui->pushLevel2Btn, &QPushButton::clicked, this, &Game::setSecondLevel);
     connect(ui->pushMenuBtn, &QPushButton::clicked, this, &Game::setHome);
+
+    connect(ui->btn_level_1, &QPushButton::clicked, this, &Game::onBtnLevel1Clicked);
+    connect(ui->btn_level_2, &QPushButton::clicked, this, &Game::onBtnLevel2Clicked);
+    connect(ui->btn_exit_game, &QPushButton::clicked, this, &Game::onBtnExitGameClicked);
+    connect(ui->btn_go_back, &QPushButton::clicked, this, &Game::onBtnGoBackClicked);
+    connect(ui->btn_continue, &QPushButton::clicked, this, &Game::onBtnContinueClicked);
 }
 
 Game::~Game()
